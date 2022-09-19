@@ -1,4 +1,4 @@
-![Logo](https://logosbynick.com/wp-content/uploads/2018/03/final-logo-example.png)
+![ohs](https://user-images.githubusercontent.com/17894639/191040348-8a48203e-2ba4-4f03-bd77-d27710633ea5.jpg)
 
 ## 프로잭트 소개
 '오행시'는 '오늘 행정반 소식'의 줄임말로 행정반 업무를 분담하는 전자 게시판입니다.
