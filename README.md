@@ -49,7 +49,7 @@ $ yarn start or npm run start
  
 ## 팀 정보 (Team Information)
 - Kim Suyoung (suyoung154@gmail.com), Github: kimpeupeu
-- Kim Sunkyu (추가예정)
+- Kim Sungyu (kskksk0925@naver.com), Github : kimseongyu
 
 ## 저작권 및 사용권 정보 (Copyleft / End User License
  * [MIT](https://github.com/kimpeupeu/WEB_OhHaengSi_Acrostic/blob/master/LICENSE)
