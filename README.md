@@ -20,7 +20,7 @@
  * develop: 다음 버전을 개발하는 브랜치
  * ~~feature: 개별 기능 브랜치 (develop 브랜치로 들어감)~~
  * develop/suyoung: 김수영 개발자 작업 브랜치 (develop 브랜치로 들어감)
- * develop/sungyu: 김선규 개발자 작업 브랜치 (develop 브랜치로 들어감)
+ * develop/seongyu: 김선규 개발자 작업 브랜치 (develop 브랜치로 들어감)
  * release: 다음 버전 출시를 준비하는 브랜치. develop 브랜치에서 옮겨진 후 테스트를 거쳐 master로 합침
  * hotfix: master에서 발생한 버그를 바로 수정하는 브랜치
 
@@ -52,7 +52,7 @@ $ yarn start or npm run start
  
 ## 팀 정보 (Team Information)
 - Kim Suyoung (suyoung154@gmail.com), Github: kimpeupeu
-- Kim Sungyu (kskksk0925@naver.com), Github : kimseongyu
+- Kim Seongyu (kskksk0925@naver.com), Github : kimseongyu
 
 ## 저작권 및 사용권 정보 (Copyleft / End User License
  * [MIT](https://github.com/kimpeupeu/WEB_OhHaengSi_Acrostic/blob/master/LICENSE)
