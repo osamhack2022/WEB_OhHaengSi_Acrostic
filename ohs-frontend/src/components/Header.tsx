@@ -1,8 +1,14 @@
 import React from 'react';
-import { getCookie } from '../utils/Cookie';
+import { getCookie, rmCookie } from '../utils/Cookie';
 
 function Header(): React.ReactElement {
-  if (getCookie('id') == null) {
+  const id = getCookie('id');
+  const logout = () => {
+    rmCookie('id');
+    window.location.reload();
+  };
+
+  if (id == null) {
     return (
       <header>
         <p>로그인하여 주십시오.</p>
@@ -11,7 +17,8 @@ function Header(): React.ReactElement {
   } else {
     return (
       <header>
-        <p>{getCookie('id')}님 반갑습니다.</p>
+        <p>{id}님 반갑습니다.</p>
+        <button onClick={logout}>logout</button>
       </header>
     );
   }
