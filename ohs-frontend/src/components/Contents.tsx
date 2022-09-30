@@ -1,6 +1,7 @@
 import React from 'react';
 import { getCookie } from '../utils/Cookie';
 import Login from './Login';
+import PersonnelStatus from './PersonnelStatus';
 
 interface ContentsProps {
   content: number;
@@ -11,7 +12,7 @@ function Contents(props: ContentsProps): React.ReactElement {
     return <Login />;
   } else {
     if (props.content === 1) {
-      return <div>인원현황입니다.</div>;
+      return <PersonnelStatus />;
     } else if (props.content === 2) {
       return <div>근무표입니다.</div>;
     } else if (props.content === 3) {
