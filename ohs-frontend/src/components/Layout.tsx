@@ -1,5 +1,5 @@
 import React from 'react';
-import Nav, { NavLink } from 'react-router-dom';
+import { dateFormat } from '../utils/Date';
 import Contents from './Contents';
 
 function Layout(): React.ReactElement {
@@ -7,7 +7,9 @@ function Layout(): React.ReactElement {
 
   return (
     <div>
-      <img src="" alt="logo" onClick={() => setContent(1)} />
+      <h1>오행시</h1>
+      <label>{dateFormat}</label>
+      {/* <img src="" alt="logo" onClick={() => setContent(1)} /> */}
       <div>
         <ul>
           <li onClick={() => setContent(1)}>인원현황</li>
