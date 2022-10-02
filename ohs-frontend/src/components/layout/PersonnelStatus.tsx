@@ -1,5 +1,5 @@
 import React from 'react';
-import UsePersonnelData from '../hooks/UsePersonnelData';
+import UsePersonnelData from '../../hooks/UsePersonnelData';
 
 function PersonnelStatus(): React.ReactElement {
   const { personnelData, currentPersonnelData, totalPersonnel, currentPersonnel } = UsePersonnelData();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { dateFormat } from '../utils/Date';
-import Contents from './Contents';
+import Contents from './layout/Contents';
 
 function Layout(): React.ReactElement {
   const [content, setContent] = React.useState(1);

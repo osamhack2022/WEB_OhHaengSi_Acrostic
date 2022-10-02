@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import UseWorker, { workerDataType } from '../hooks/UseWorker';
+import UseWorker, { workerDataType } from '../../hooks/UseWorker';
 
 function Schedule(): React.ReactElement {
   const { wakeWorkerData, vigilWorkerData, confirm } = UseWorker();
 
   const addWorker = (workers: workerDataType[]) => {
     return (
-      <>
+      <div>
         {workers == wakeWorkerData ? <h2>상황병</h2> : <h2>불침번</h2>}
         <table>
           <thead>
@@ -30,7 +30,7 @@ function Schedule(): React.ReactElement {
             })}
           </tbody>
         </table>
-      </>
+      </div>
     );
   };
 
