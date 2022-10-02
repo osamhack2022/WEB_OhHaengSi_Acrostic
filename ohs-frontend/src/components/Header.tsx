@@ -17,7 +17,7 @@ function Header(): React.ReactElement {
   } else {
     return (
       <header>
-        <p>{id}님 반갑습니다.</p>
+        <label>{id}님 반갑습니다.</label>
         <button onClick={logout}>logout</button>
       </header>
     );
