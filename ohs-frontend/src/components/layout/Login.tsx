@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { setCookie } from '../utils/Cookie';
+import { setCookie } from '../../utils/Cookie';
 import { useForm } from 'react-hook-form';
 
 function Login(): React.ReactElement {
