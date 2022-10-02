@@ -4,25 +4,22 @@ import UsePersonnelData from '../hooks/UsePersonnelData';
 function PersonnelStatus(): React.ReactElement {
   const { personnelData, currentPersonnelData, totalPersonnel, currentPersonnel } = UsePersonnelData();
   return (
-    <>
+    <div>
       {personnelData.map((element, idx) => {
         return (
-          <table key={idx}>
-            <tbody>
-              <tr>
-                <td>관등성명</td>
-                <td>{element.name}</td>
-              </tr>
-              <tr>
-                <td>현황</td>
-                <td>{element.state}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div key={idx}>
+            <label>{element.class} </label>
+            <label>{element.name} </label>
+            <select id="state" defaultValue={element.state}>
+              <option value="근무">근무</option>
+              <option value="휴가">휴가</option>
+            </select>
+          </div>
         );
       })}
-      <p>총원 : {totalPersonnel}</p>
-      <p>현재원 : {currentPersonnel}</p>
+      <p>
+        총원 : {totalPersonnel}, 현재원 : {currentPersonnel}
+      </p>
       <p>열외사유</p>
       <table>
         <thead>
@@ -40,7 +37,7 @@ function PersonnelStatus(): React.ReactElement {
           </tr>
         </tbody>
       </table>
-    </>
+    </div>
   );
 }
 

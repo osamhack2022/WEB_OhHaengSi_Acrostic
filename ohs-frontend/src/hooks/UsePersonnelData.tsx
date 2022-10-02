@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { strNumDic } from '../utils/DictionaryType';
 
-type personnelDataType = { name: string; state: string };
+type personnelDataType = { class: string; name: string; state: string };
 
 function UsePersonnelData() {
   // 인원현황을 저장하는 오브젝트 배열
   const [personnelData, setPersonnelData] = useState<personnelDataType[]>([
-    { name: '김선규', state: '근무' },
-    { name: '김수영', state: '휴가' },
+    { class: '상병', name: '김선규', state: '근무' },
+    { class: '상병', name: '김선규', state: '휴가' },
+    { class: '일병', name: '김수영', state: '근무' },
+    { class: '일병', name: '김수영', state: '휴가' },
   ]);
   // 현재원의 상태를 {종류:인원}으로 저장하는 오브젝트
   const [currentPersonnelData, setCurrentPersonnelData] = useState<strNumDic>(() => {
