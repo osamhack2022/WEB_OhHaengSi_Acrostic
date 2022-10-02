@@ -12,10 +12,10 @@ export class RoomService {
   ) {}
 
   create(createRoomDto: CreateRoomDto) {
-    return 'This action adds a new room';
+    return this.roomRepo.save(createRoomDto);
   }
 
-  async findAll(): Promise<Room[]> {
+  findAll(): Promise<Room[]> {
     return this.roomRepo.find();
   }
 
