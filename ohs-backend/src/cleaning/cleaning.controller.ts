@@ -17,9 +17,9 @@ export class CleaningController {
     return this.cleaningService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.cleaningService.findOne(+id);
+  @Get(':room/:date')
+  findOne(@Param('room') room: string, @Param('date') date: string) {
+    return this.cleaningService.findOne(room, date);
   }
 
   @Patch(':id')

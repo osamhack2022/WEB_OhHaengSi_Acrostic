@@ -12,8 +12,27 @@ export class CleaningService {
     return `This action returns all cleaning`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} cleaning`;
+  findOne(room: string, date: string) {
+    return {
+      room,
+      date,
+      byRoom: [
+        ['청소구역1', 1, 2, 3, 4],
+        ['청소구역2', 1, 2, 3, 4],
+        ['청소구역3', 1, 2, 3, 4],
+        ['청소구역4', 1, 2, 3, 4],
+        ['청소구역5', 1, 2, 3, 4],
+      ],
+      inRoom: [
+        ['청소구역1', '김일병', '박이병', '이상병', '진병장'],
+        ['청소구역2', '김일병', '박이병', '이상병', '진병장'],
+        ['청소구역3', '김일병', '박이병', '이상병', '진병장'],
+        ['청소구역4', '김일병', '박이병', '이상병', '진병장'],
+        ['청소구역5', '김일병', '박이병', '이상병', '진병장'],
+        ['청소구역6', '김일병', '박이병', '이상병', '진병장'],
+        ['청소구역7', '김일병', '박이병', '이상병', '진병장'],
+      ],
+    };
   }
 
   update(id: number, updateCleaningDto: UpdateCleaningDto) {
