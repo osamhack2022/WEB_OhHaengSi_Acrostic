@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { RosterService } from './roster.service';
 import { CreateRosterDto } from './dto/create-roster.dto';
 import { UpdateRosterDto } from './dto/update-roster.dto';
@@ -17,9 +25,9 @@ export class RosterController {
     return this.rosterService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.rosterService.findOne(+id);
+  @Get(':date')
+  findOne(@Param('date') date: string) {
+    return this.rosterService.findOne(date);
   }
 
   @Patch(':id')

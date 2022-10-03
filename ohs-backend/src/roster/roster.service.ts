@@ -12,8 +12,112 @@ export class RosterService {
     return `This action returns all roster`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} roster`;
+  findOne(date: string) {
+    return {
+      date,
+      rosters: [
+        {
+          name: '상황병',
+          works: [
+            {
+              name: '지휘통제실',
+              memeber: [
+                {
+                  name: '박일병',
+                  rank: 2,
+                  rank_name: '일병',
+                },
+                {
+                  name: '정상병',
+                  rank: 3,
+                  rank_name: '상병',
+                },
+              ],
+            },
+            {
+              name: '지휘통제실',
+              memeber: [
+                {
+                  name: '박일병',
+                  rank: 2,
+                  rank_name: '일병',
+                },
+                {
+                  name: '정상병',
+                  rank: 3,
+                  rank_name: '상병',
+                },
+              ],
+            },
+            {
+              name: '지휘통제실',
+              memeber: [
+                {
+                  name: '박일병',
+                  rank: 2,
+                  rank_name: '일병',
+                },
+                {
+                  name: '정상병',
+                  rank: 3,
+                  rank_name: '상병',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: '불침번',
+          works: [
+            {
+              name: '22:00~00:00',
+              memeber: [
+                {
+                  name: '박일병',
+                  rank: 2,
+                  rank_name: '일병',
+                },
+                {
+                  name: '정상병',
+                  rank: 3,
+                  rank_name: '상병',
+                },
+              ],
+            },
+            {
+              name: '22:00~00:00',
+              memeber: [
+                {
+                  name: '박일병',
+                  rank: 2,
+                  rank_name: '일병',
+                },
+                {
+                  name: '정상병',
+                  rank: 3,
+                  rank_name: '상병',
+                },
+              ],
+            },
+            {
+              name: '22:00~00:00',
+              memeber: [
+                {
+                  name: '박일병',
+                  rank: 2,
+                  rank_name: '일병',
+                },
+                {
+                  name: '정상병',
+                  rank: 3,
+                  rank_name: '상병',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
   }
 
   update(id: number, updateRosterDto: UpdateRosterDto) {
