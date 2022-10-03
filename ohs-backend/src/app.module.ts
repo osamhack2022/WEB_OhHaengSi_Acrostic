@@ -6,6 +6,8 @@ import { CleaningModule } from './cleaning/cleaning.module';
 import { NoticeModule } from './notice/notice.module';
 import { EmergencyModule } from './emergency/emergency.module';
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { ConfigModule } from '@nestjs/config';
     CleaningModule,
     NoticeModule,
     EmergencyModule,
+    AuthModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [AppService],
