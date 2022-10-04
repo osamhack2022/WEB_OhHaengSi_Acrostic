@@ -16,7 +16,11 @@ export class SoldiersService {
   }
 
   findAll() {
-    return this.soliderRepo.find();
+    return this.soliderRepo.find({
+      relations: {
+        room: true,
+      },
+    });
   }
 
   findOne(id: number) {

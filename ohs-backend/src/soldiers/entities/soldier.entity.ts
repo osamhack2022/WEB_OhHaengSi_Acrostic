@@ -23,6 +23,7 @@ export class Soldier {
   room: Room;
 
   @RelationId((soldier: Soldier) => soldier.room)
+  @Column({ nullable: false })
   roomId: number;
 }
 
