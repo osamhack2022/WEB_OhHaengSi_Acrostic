@@ -1,4 +1,12 @@
-import { IsNotEmpty, IsNumber, IsNumberString } from 'class-validator';
+import {
+  IsEmpty,
+  IsEnum,
+  IsNotEmpty,
+  IsNumber,
+  IsNumberString,
+  IsOptional,
+} from 'class-validator';
+import { SoldierStatus } from '../entities/soldier.entity';
 
 export class CreateSoldierDto {
   @IsNotEmpty()
@@ -9,4 +17,8 @@ export class CreateSoldierDto {
 
   @IsNumber()
   roomId: number;
+
+  @IsEnum(SoldierStatus)
+  @IsOptional()
+  status: SoldierStatus = SoldierStatus.PRESENCE;
 }
