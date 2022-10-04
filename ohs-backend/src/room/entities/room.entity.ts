@@ -1,3 +1,4 @@
+import { genProvider } from 'src/database/database.helper';
 import { Entity, Column, PrimaryGeneratedColumn, DataSource } from 'typeorm';
 
 @Entity()
@@ -9,10 +10,4 @@ export class Room {
   name: string;
 }
 
-export const roomProviders = [
-  {
-    provide: 'ROOM_REPOSITORY',
-    useFactory: (dataSource: DataSource) => dataSource.getRepository(Room),
-    inject: ['DATA_SOURCE'],
-  },
-];
+export const roomProviders = genProvider("ROOM_REPOSITORY", Room);
