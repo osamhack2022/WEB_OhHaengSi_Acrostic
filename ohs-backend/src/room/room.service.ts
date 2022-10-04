@@ -16,13 +16,17 @@ export class RoomService {
   }
 
   findAll(): Promise<Room[]> {
-    return this.roomRepo.find();
+    return this.roomRepo.find({
+      relations: {
+        members: true,
+      },
+    });
   }
 
   findOne(id: number) {
     return {
       room: {
-        id
+        id,
       },
       members: [
         {
