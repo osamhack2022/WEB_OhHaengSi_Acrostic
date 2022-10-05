@@ -1,0 +1,79 @@
+.personnelStatus {
+  .dormitory {
+    width: 720px;
+
+    margin: 0 auto;
+
+    h2 {
+      margin: 8px auto;
+    }
+
+    .person {
+      display: inline-block;
+      width: 280px;
+      height: 80px;
+
+      margin: 10px 40px;
+
+      background-color: #009879;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+      border-radius: 5px;
+
+      label {
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+
+        margin: 10px 5px;
+        line-height: 60px;
+
+        background-color: white;
+
+        border-radius: 25%;
+      }
+
+      .selectBox {
+        display: inline-block;
+        width: 120px;
+        margin: 10px 5px;
+      }
+    }
+  }
+
+  .status {
+    display: inline-block;
+
+    margin: 20px auto;
+
+    font-size: 20px;
+  }
+
+  .absence {
+    label {
+      display: inline-block;
+      margin: 10px auto;
+      font-size: 16px;
+    }
+
+    table {
+      width: 400px;
+
+      box-shadow: rgba(0, 0, 0, 0.15) 0 0 20px;
+
+      border-collapse: collapse;
+      border: solid #009879 1px;
+      border-radius: 5px;
+
+      thead tr {
+        background-color: #009879;
+        color: #ffffff;
+      }
+
+      th,
+      td {
+        padding: 12px 15px;
+      }
+    }
+  }
+}

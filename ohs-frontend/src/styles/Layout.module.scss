@@ -1,0 +1,50 @@
+.wrap {
+  position: relative;
+
+  box-sizing: border-box;
+  width: 840px;
+  height: 100%;
+
+  margin: 0 auto;
+  margin-top: -48px;
+  padding-top: 48px;
+  padding-bottom: 24px;
+
+  text-align: center;
+
+  table {
+    margin: 0 auto;
+  }
+
+  .menu {
+    position: relative;
+
+    height: 60px;
+
+    li {
+      border-collapse: separate;
+      display: inline-block;
+
+      margin: 10px 30px;
+      padding: 6px 12px;
+
+      background-color: white;
+
+      border-radius: 5px;
+
+      transition: color 1s ease-in-out;
+
+      text-decoration: none;
+      font-size: 16px;
+
+      &:hover {
+        color: white;
+        background-color: #009879;
+      }
+    }
+  }
+
+  .contentsbox {
+    background-color: white;
+  }
+}
