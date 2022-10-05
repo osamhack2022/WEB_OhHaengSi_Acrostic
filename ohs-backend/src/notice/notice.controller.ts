@@ -1,15 +1,29 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  UseGuards,
+  Req,
+} from '@nestjs/common';
 import { NoticeService } from './notice.service';
 import { CreateNoticeDto } from './dto/create-notice.dto';
 import { UpdateNoticeDto } from './dto/update-notice.dto';
+import { JwtAuthGuard } from 'src/auth/jwt.guard';
+import { Request } from 'express';
 
 @Controller('notice')
 export class NoticeController {
   constructor(private readonly noticeService: NoticeService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createNoticeDto: CreateNoticeDto) {
-    return this.noticeService.create(createNoticeDto);
+  create(@Body() createNoticeDto: CreateNoticeDto, @Req() req: Request) {
+    return this.noticeService.create(createNoticeDto, req.user.id);
   }
 
   @Get()

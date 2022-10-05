@@ -1,5 +1,12 @@
 import { genProvider } from '../../database/database.helper';
-import { Entity, Column, PrimaryGeneratedColumn, DataSource } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  DataSource,
+  OneToMany,
+} from 'typeorm';
+import { Notice } from 'src/notice/entities/notice.entity';
 
 @Entity()
 export class User {
@@ -7,7 +14,7 @@ export class User {
   id: number;
 
   @Column({
-    unique: true
+    unique: true,
   })
   username: string;
 
@@ -19,6 +26,9 @@ export class User {
 
   @Column()
   rank: string;
+
+  @OneToMany(() => Notice, (notice) => notice.writer)
+  notices: Notice[];
 }
 
-export const userProviders = genProvider("USER_REPOSITORY", User);
+export const userProviders = genProvider('USER_REPOSITORY', User);
