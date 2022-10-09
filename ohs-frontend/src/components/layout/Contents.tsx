@@ -1,10 +1,10 @@
 import React from 'react';
 import { getCookie } from '../../utils/Cookie';
 import Board from './Board';
-import CleaningEach from './CleaningEach';
+import CleaningEach from './Cleaning';
 import Emergency from './Emergency';
 import Login from './Login';
-import PersonnelStatus from './PersonnelStatus';
+import PersonnelStatus from './Personnel';
 import Schedule from './Schedule';
 
 interface ContentsProps {
