@@ -1,10 +1,12 @@
 .header {
   position: relative;
+  z-index: 1000;
 
   width: 840px;
   height: 48px;
 
   margin: 0 auto;
+
   label {
     float: right;
     margin: auto 12px;
@@ -12,6 +14,9 @@
 
   button {
     float: right;
+    &:hover {
+      cursor: pointer;
+    }
   }
   background-color: rgb(119, 119, 119);
 }

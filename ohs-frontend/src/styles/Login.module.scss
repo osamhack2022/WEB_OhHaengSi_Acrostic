@@ -1,0 +1,46 @@
+.login {
+  margin: 40px auto;
+
+  label {
+    display: inline-block;
+    width: 40px;
+    line-height: 45px;
+
+    margin: 10px auto;
+
+    border-bottom: solid #009879 1px;
+  }
+
+  input {
+    margin: 10px auto;
+    border: 0;
+
+    &:not([type='submit']) {
+      width: 240px;
+      line-height: 40px;
+      border-bottom: solid #009879 1px;
+
+      font-size: 16px;
+      text-indent: 10px;
+      outline: none;
+
+      color: transparent;
+      text-shadow: 0 0 0 black;
+    }
+
+    &[type='submit'] {
+      width: 80px;
+      height: 40px;
+
+      border-radius: 5px;
+
+      color: white;
+      background-color: #009879;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
