@@ -1,37 +1,78 @@
-import { Injectable } from '@nestjs/common';
-import { CreateCleaningDto } from './dto/create-cleaning.dto';
+import { Inject, Injectable } from '@nestjs/common';
+import { Room } from 'src/room/entities/room.entity';
+import { Repository } from 'typeorm';
+import {
+  CreateCleaningDto,
+  CreateRoomCleaningSchedDto,
+} from './dto/create-cleaning.dto';
 import { UpdateCleaningDto } from './dto/update-cleaning.dto';
+import { Cleaning, RoomCleaningSched } from './entities/cleaning.entity';
 
 @Injectable()
 export class CleaningService {
+  constructor(
+    @Inject('CLEANING_REPOSITORY')
+    private readonly cleaningRepo: Repository<Cleaning>,
+    @Inject('ROOM_CLEANING_SCHED_REPOSITORY')
+    private readonly roomCleaningSchedRepo: Repository<RoomCleaningSched>,
+    @Inject('ROOM_REPOSITORY')
+    private readonly roomRepo: Repository<Room>,
+  ) {}
+
   create(createCleaningDto: CreateCleaningDto) {
-    return 'This action adds a new cleaning';
+    return this.cleaningRepo.save(createCleaningDto);
+  }
+
+  createRoomSched(
+    roomId: number,
+    createRoomCleaningSchedDto: CreateRoomCleaningSchedDto,
+  ) {
+    return this.roomCleaningSchedRepo.save({
+      roomId,
+      ...createRoomCleaningSchedDto,
+    });
   }
 
   findAll() {
-    return `This action returns all cleaning`;
+    return this.cleaningRepo.find();
   }
 
-  findOne(room: string, date: string) {
+  async getBarrackCleaningSchedule(weeks = 4) {
+    // 청소구역 목록
+    let cleaningAreas = await this.cleaningRepo.find();
+
+    // 생활관 목록
+    let rooms = await this.roomRepo.find();
+
+    let schedule = [];
+
+    for (const cleaningArea of cleaningAreas) {
+      let weekSchedule = [];
+      weekSchedule.push(cleaningArea.name);
+
+      // 기존 책임이었던 생활관부터 차례대로 삽입
+      // 4주차(weeks)까지 처리
+      let tmp = rooms.findIndex((room) => room.id == cleaningArea.inChargeId);
+      for (let i = tmp; i < tmp + weeks; i++) {
+        let inChargeRoom = rooms[i % rooms.length];
+        weekSchedule.push(inChargeRoom.name);
+      }
+      schedule.push(weekSchedule);
+    }
+
+    return schedule;
+  }
+
+  async getRoomCleaningSchedule() {}
+
+  async findOne(room: number, date: string) {
     return {
       room,
       date,
-      byRoom: [
-        ['청소구역1', 1, 2, 3, 4],
-        ['청소구역2', 1, 2, 3, 4],
-        ['청소구역3', 1, 2, 3, 4],
-        ['청소구역4', 1, 2, 3, 4],
-        ['청소구역5', 1, 2, 3, 4],
-      ],
-      inRoom: [
-        ['청소구역1', '김일병', '박이병', '이상병', '진병장'],
-        ['청소구역2', '김일병', '박이병', '이상병', '진병장'],
-        ['청소구역3', '김일병', '박이병', '이상병', '진병장'],
-        ['청소구역4', '김일병', '박이병', '이상병', '진병장'],
-        ['청소구역5', '김일병', '박이병', '이상병', '진병장'],
-        ['청소구역6', '김일병', '박이병', '이상병', '진병장'],
-        ['청소구역7', '김일병', '박이병', '이상병', '진병장'],
-      ],
+      byRoom: await this.getBarrackCleaningSchedule(),
+      inRoom: await this.roomCleaningSchedRepo.find({
+        where: { roomId: room },
+      }),
     };
   }
 
