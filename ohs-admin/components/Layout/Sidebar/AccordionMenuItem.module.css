@@ -1,0 +1,8 @@
+.collapseIndicator {
+  width: 1rem;
+  text-align: center;
+  float: right;
+  vertical-align: 0;
+  border: 0;
+  font-weight: 400;
+}

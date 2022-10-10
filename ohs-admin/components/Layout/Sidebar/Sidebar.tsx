@@ -2,6 +2,7 @@ import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { PropsWithChildren } from "react";
 import mergeClassNames from "../../../lib/helpers/mergeClassNames";
+import AccordionMenuItem from "./AccordionMenuItem";
 import MenuItem from "./MenuItem";
 
 function SidebarDivider({ className }: { className?: string }) {
@@ -20,7 +21,7 @@ const Sidebar: React.FC = () => {
     >
       <a
         className="sidebar-brand d-flex align-items-center justify-content-center"
-        href="index.html"
+        href="/"
       >
         <div className="sidebar-brand-icon ">
           <FontAwesomeIcon icon={solid("user-group")} />
@@ -29,7 +30,21 @@ const Sidebar: React.FC = () => {
       </a>
       <SidebarDivider />
       <SidebarHeading>병영 관리</SidebarHeading>
-      <MenuItem name="병사 관리" href="/" icon={solid("users")} />
+      <AccordionMenuItem
+        name="병사 관리"
+        parentPath="/soldier"
+        icon={solid("users")}
+        subPaths={[
+          {
+            name: "병사 목록",
+            path: "/soldier",
+          },
+          {
+            name: "병사 추가",
+            path: "/soldier/create",
+          },
+        ]}
+      />
       <MenuItem
         name="생활관 관리"
         href="/room"
@@ -41,6 +56,7 @@ const Sidebar: React.FC = () => {
         icon={solid("clipboard-list")}
       />
       <MenuItem name="임무분담제 관리" href="/cleaning" icon={solid("broom")} />
+      <MenuItem name="전파사항 관리" href="/notice" icon={solid("bullhorn")} />
       <SidebarDivider />
       <SidebarHeading>기타</SidebarHeading>
       <MenuItem
