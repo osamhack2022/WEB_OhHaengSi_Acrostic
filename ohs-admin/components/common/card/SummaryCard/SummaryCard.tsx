@@ -1,7 +1,7 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { PropsWithChildren } from "react";
-import mergeStyles from "../../../../lib/helpers/mergeStyles";
+import mergeClassNames from "../../../../lib/helpers/mergeClassNames";
 
 export type SummaryCardThemeName =
   | "primary"
@@ -71,13 +71,13 @@ export default function SummaryCard({
 
   return (
     <div className={className}>
-      <div className={mergeStyles("card shadow h-100 py-2", theme.border)}>
+      <div className={mergeClassNames("card shadow h-100 py-2", theme.border)}>
         <div className="card-body">
           <div className="row no-gutters align-items-center">
             <div className="col mr-2">
               {title && (
                 <div
-                  className={mergeStyles(
+                  className={mergeClassNames(
                     "text-xs font-weight-bold text-uppercase mb-1",
                     theme.title
                   )}
