@@ -102,4 +102,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default withCredential(Home);
+export default Home;
