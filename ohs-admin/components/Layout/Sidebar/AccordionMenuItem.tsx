@@ -51,7 +51,6 @@ export default function AccordionMenuItem({
         data-parent="#accordionSidebar"
       >
         <div className="bg-white py-2 collapse-inner rounded">
-          <h6 className="collapse-header">Custom Components:</h6>
           {subPaths.map((subPath) => (
             <a
               key={subPath.path}
