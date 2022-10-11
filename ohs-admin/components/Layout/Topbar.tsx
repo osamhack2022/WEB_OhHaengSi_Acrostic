@@ -1,7 +1,10 @@
 import { solid, regular } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useUser from "../../lib/auth/useUser";
 
 export default function Topbar() {
+  const [user, setUser] = useUser();
+
   return (
     <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
       <button
@@ -236,8 +239,13 @@ export default function Topbar() {
             aria-haspopup="true"
             aria-expanded="false"
           >
-            <span className="mr-2 d-none d-lg-inline text-gray-600 small">
-              Douglas McGee
+            <span
+              className="mr-2 d-none d-lg-inline text-gray-600 small"
+              onClick={() => {
+                setUser(null);
+              }}
+            >
+              {user ? `${user.rank} ${user.name} 님` : "로그인 필요"}
             </span>
           </a>
           <div

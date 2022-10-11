@@ -7,6 +7,7 @@ import PageHeader from "../components/common/PageHeader";
 import Container from "../components/Layout/Container";
 import Layout from "../components/Layout/Layout";
 import Row from "../components/Layout/Row";
+import withCredential from "../lib/auth/withCredential";
 
 const Home: NextPage = () => {
   return (
@@ -101,4 +102,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default withCredential(Home);
