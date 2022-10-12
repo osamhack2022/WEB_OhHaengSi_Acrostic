@@ -27,8 +27,9 @@ export class SoldiersService {
     return this.soliderRepo.findOne({ where: { id } });
   }
 
-  update(id: number, updateSoldierDto: UpdateSoldierDto) {
-    return this.soliderRepo.update({ id }, updateSoldierDto);
+  async update(id: number, updateSoldierDto: UpdateSoldierDto) {
+    await this.soliderRepo.update({ id }, updateSoldierDto);
+    return await this.soliderRepo.findOne({ where: { id } });
   }
 
   remove(id: number) {
