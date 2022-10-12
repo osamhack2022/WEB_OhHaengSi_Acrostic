@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  BadRequestException,
 } from '@nestjs/common';
 import { RosterService } from './roster.service';
 import { CreateRosterDto } from './dto/create-roster.dto';
@@ -27,7 +28,11 @@ export class RosterController {
 
   @Get(':date')
   findOne(@Param('date') date: string) {
-    return this.rosterService.findOne(date);
+    if (!Date.parse(date)) {
+      throw new BadRequestException(`${date} is not valid format (yyyy-mm-dd)`);
+    }
+
+    return this.rosterService.findOne(new Date(date));
   }
 
   @Patch(':id')
