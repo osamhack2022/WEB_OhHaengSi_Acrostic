@@ -1,10 +1,8 @@
 import { genProvider } from 'src/database/database.helper';
 import { Room } from 'src/room/entities/room.entity';
-import { Soldier } from 'src/soldiers/entities/soldier.entity';
 import {
   Column,
   Entity,
-  ManyToMany,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -44,22 +42,22 @@ export class RoomCleaningSched {
   @RelationId((rcs: RoomCleaningSched) => rcs.room)
   roomId: number;
 
-  @Column()
+  @Column({ default: null })
   primaryFirst: string;
-  @Column()
+  @Column({ default: null })
   primarySecond: string;
-  @Column()
+  @Column({ default: null })
   primaryThird: string;
-  @Column()
+  @Column({ default: null })
   primaryFourth: string;
 
-  @Column()
+  @Column({ default: null })
   subFirst: string;
-  @Column()
+  @Column({ default: null })
   subSecond: string;
-  @Column()
+  @Column({ default: null })
   subThird: string;
-  @Column()
+  @Column({ default: null })
   subFourth: string;
 }
 
