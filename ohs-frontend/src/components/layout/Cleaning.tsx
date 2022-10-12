@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from '../../styles/Cleaning.module.scss';
 import UseCleaning from '../../hooks/UseCleaning';
+import { getCookie } from '../../utils/Cookie';
+import { dateYMDFormat } from '../../utils/Date';
 
 function CleaningEach(): React.ReactElement {
-  const { byRoom, inRoom, personnel } = UseCleaning();
+  const { byRoom, inRoom, personnel, selectStyle } = UseCleaning({ room: getCookie('id'), date: dateYMDFormat });
 
   // table의 주차별 th 생성
   const eachWeek = () => {
@@ -17,19 +19,19 @@ function CleaningEach(): React.ReactElement {
   // 담당구역 인원변경을 위한 드롭박스 생성
   // 값 변경시 서버에 데이터 변경요청을 위한 함수 구현 예정
   // onClick 드롭박스로 변경예정
-  // const selectPerson = (name: string) => {
-  //   return (
-  //     <select id="selectPerson" defaultValue={name}>
-  //       {personnel.map((element, idx) => {
-  //         return (
-  //           <option key={idx} value={element}>
-  //             {element}
-  //           </option>
-  //         );
-  //       })}
-  //     </select>
-  //   );
-  // };
+  const selectPerson = (name: string) => {
+    return (
+      <select id="selectPerson" defaultValue={name}>
+        {personnel.map((element, idx) => {
+          return (
+            <option key={idx} value={element}>
+              {element}
+            </option>
+          );
+        })}
+      </select>
+    );
+  };
 
   // 생활관 별 담당구역 Table
   const byRoomTable = () => {
@@ -64,7 +66,7 @@ function CleaningEach(): React.ReactElement {
   const inRoomTable = () => {
     return (
       <div className={styles.outRoom}>
-        <h2>생활관 내 담당구역</h2>
+        <h2>{getCookie('room')}생활관 내 담당구역</h2>
         <table>
           <thead>
             <tr>
@@ -83,11 +85,10 @@ function CleaningEach(): React.ReactElement {
                 <tr key={idx}>
                   <th>{area[0]}</th>
                   {area.slice(1).map((person, idx) => {
-                    // return <td key={idx}>{selectPerson(person)}</td>;
+                    return <td key={idx}>{selectPerson(person)}</td>;
                     return <td key={idx}>{person}</td>;
                   })}
                   {area.slice(1).map((person, idx) => {
-                    // return <td key={idx}>{selectPerson(person)}</td>;
                     return <td key={idx}>{person}</td>;
                   })}
                 </tr>

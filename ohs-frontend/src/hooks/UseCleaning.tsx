@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { NonceProvider } from 'react-select';
 
 type data = {
   room: number;
@@ -28,7 +29,9 @@ const example_data: data = {
   ],
 };
 
-function UseCleaning() {
+type prop = { room: string; date: string };
+
+function UseCleaning(Prop: prop) {
   // 생활관 별 담당구역 데이터
   const [byRoom, setByRoom] = useState<(string | number)[][]>([]);
   // 생활관 내 담당구역 데이터
@@ -36,13 +39,30 @@ function UseCleaning() {
   // 생활관 내 인원
   const [personnel, setPersonnel] = useState<string[]>([]);
 
+  const selectStyle = (x: number, y: number, display: boolean) => {
+    return {
+      display: 'inline-block',
+      zIndex: 999,
+      // display : {display} ? 'inline-block': 'none',
+      position: 'absolute',
+      top: x,
+      left: y,
+    };
+  };
+
   // 담당구역 변경 시 사용할 함수
   const chPerson = () => {};
 
+  // 사용자에게 보여줄 데이터를 전송하는 함수
   const getData = () => {
-    axios.get('https://ohs.run.goorm.io/roster').then((response: any) => {
-      console.log(response);
-    });
+    axios
+      .get('https://ohs.run.goorm.io/roster/' + Prop.room + '/' + Prop.date)
+      .then((response: any) => {
+        console.log(response);
+      })
+      .catch(e => {
+        console.log(e);
+      });
 
     setByRoom(example_data.byRoom);
     setInRoom(example_data.inRoom);
@@ -53,7 +73,7 @@ function UseCleaning() {
     getData();
   }, []);
 
-  return { byRoom: byRoom, inRoom: inRoom, personnel };
+  return { byRoom: byRoom, inRoom: inRoom, personnel, selectStyle };
 }
 
 export default UseCleaning;
