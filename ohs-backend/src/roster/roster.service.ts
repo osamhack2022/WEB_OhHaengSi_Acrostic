@@ -99,7 +99,7 @@ export class RosterService {
             rosterId: roster.id,
             name: roster.inCharge.name,
             rankName: rankToString(roster.inCharge.rank),
-            checked: false,
+            checked: roster.checked,
           }
         : null;
 
@@ -146,8 +146,9 @@ export class RosterService {
     };
   }
 
-  update(id: number, updateRosterDto: UpdateRosterDto) {
-    return `This action updates a #${id} roster`;
+  async update(id: number, updateRosterDto: UpdateRosterDto) {
+    await this.rosterRepo.update(id, updateRosterDto);
+    return await this.rosterRepo.findOneBy({ id });
   }
 
   remove(id: number) {

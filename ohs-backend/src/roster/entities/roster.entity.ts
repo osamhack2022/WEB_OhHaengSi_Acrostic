@@ -1,6 +1,12 @@
 import { genProvider } from 'src/database/database.helper';
 import { Soldier } from 'src/soldiers/entities/soldier.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  RelationId,
+} from 'typeorm';
 
 @Entity()
 export class Roster {
@@ -24,6 +30,10 @@ export class Roster {
 
   @ManyToOne(() => Soldier)
   inCharge: Soldier;
+
+  @Column()
+  @RelationId((roster: Roster) => roster.inCharge)
+  inChargeId: number;
 }
 
 export const rosterProvider = genProvider('ROSTER_REPOSITORY', Roster);
