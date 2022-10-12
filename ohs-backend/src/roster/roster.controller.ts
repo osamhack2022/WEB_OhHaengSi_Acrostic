@@ -29,7 +29,9 @@ export class RosterController {
   @Get(':date')
   findOne(@Param('date') date: string) {
     if (!Date.parse(date)) {
-      throw new BadRequestException(`${date} is not valid format (yyyy-mm-dd)`);
+      throw new BadRequestException(
+        `${date} is not valid date format (yyyy-mm-dd)`,
+      );
     }
 
     return this.rosterService.findOne(new Date(date));
