@@ -1,46 +1,44 @@
 .login {
-  margin: 40px auto;
+  height: 500px;
 
   label {
     display: inline-block;
-    width: 40px;
-    line-height: 45px;
-
-    margin: 10px auto;
-
-    border-bottom: solid #009879 1px;
+    margin: 20px auto 10px auto;
   }
 
   input {
+    width: 240px;
     margin: 10px auto;
+    padding: 10px;
     border: 0;
+    border-bottom: solid #009879 1px;
 
-    &:not([type='submit']) {
-      width: 240px;
-      line-height: 40px;
-      border-bottom: solid #009879 1px;
+    font-size: 16px;
+    outline: none;
+  }
 
-      font-size: 16px;
-      text-indent: 10px;
-      outline: none;
+  button {
+    width: 80px;
+    height: 40px;
 
-      color: transparent;
-      text-shadow: 0 0 0 black;
-    }
+    margin: 10px;
 
-    &[type='submit'] {
-      width: 80px;
-      height: 40px;
+    border: 1px solid #009879;
+    border-radius: 5px;
+    background-color: white;
+    outline: none;
+    cursor: pointer;
 
-      border-radius: 5px;
+    transition: color 1s ease-in-out;
 
+    &:hover {
       color: white;
       background-color: #009879;
-      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
-      &:hover {
-        cursor: pointer;
-      }
     }
+  }
+
+  .selectBox {
+    width: 200px;
+    margin: 0 auto;
   }
 }

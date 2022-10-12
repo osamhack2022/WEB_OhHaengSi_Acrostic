@@ -3,20 +3,20 @@ import styles from '../styles/Header.module.scss';
 import { getCookie, rmCookie } from '../utils/Cookie';
 
 function Header(): React.ReactElement {
-  const [id, setId] = useState(getCookie('id'));
-  const logout = () => {
+  const [room, setRoom] = useState(getCookie('id'));
+  const chRoom = () => {
     rmCookie('id');
     window.location.reload();
   };
 
   return (
     <header className={styles.header}>
-      {id == null ? (
+      {room == null ? (
         <label>로그인하여 주십시오.</label>
       ) : (
         <>
-          <button onClick={logout}>logout</button>
-          <label>{id}님 반갑습니다.</label>
+          <button onClick={chRoom}>생활관 변경</button>
+          <label>{room}생활관 입니다.</label>
         </>
       )}
     </header>
