@@ -6,13 +6,12 @@ type data = {
   label: string;
 };
 const option: data[] = [
-  { value: 'working', label: '근무' },
-  { value: 'outing', label: '외출' },
-  { value: 'staying', label: '외박' },
-  { value: 'vacation', label: '휴가' },
-  { value: 'secluded', label: '외진' },
-  { value: 'zeal', label: '열중' },
-  { value: 'example', label: '기타' },
+  { value: '열중', label: '열중' },
+  { value: '외출', label: '외출' },
+  { value: '외박', label: '외박' },
+  { value: '휴가', label: '휴가' },
+  { value: '외진', label: '외진' },
+  { value: '기타', label: '기타' },
 ];
 
 function UsePersonnelStatusSelect() {
@@ -32,8 +31,12 @@ function UsePersonnelStatusSelect() {
 
   // Select box의 style을 담는 변수
   const selectStyle = {
-    control: () => ({}),
-    option: () => ({}),
+    option: () => ({
+      '&:hover': {
+        color: 'white',
+        backgroundColor: '#4287f5',
+      },
+    }),
   };
 
   return {

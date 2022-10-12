@@ -3,9 +3,10 @@ import Select from 'react-select';
 import styles from '../../styles/Personnel.module.scss';
 import UsePersonnel from '../../hooks/UsePersonnel';
 import UsePersonnelStatusSelect from '../../hooks/UsePersonnelSelect';
+import { getCookie } from '../../utils/Cookie';
 
 function PersonnelStatus(): React.ReactElement {
-  const { members, summary } = UsePersonnel({ id: 1 });
+  const { members, state, chStatus } = UsePersonnel({ id: getCookie('id') });
   const { options, defaultValue, selectStyle } = UsePersonnelStatusSelect();
 
   // 약장 생성 함수
@@ -36,7 +37,14 @@ function PersonnelStatus(): React.ReactElement {
             </div>
             <div className={styles.box}>{members[i].name}</div>
             <div className={styles.selectBox}>
-              <Select defaultValue={defaultValue(members[i].status)} options={options} />
+              <Select
+                defaultValue={defaultValue(members[i].status)}
+                options={options}
+                onChange={select => {
+                  chStatus(members[i].id, select!.value);
+                }}
+                styles={selectStyle}
+              />
             </div>
           </div>,
         );
@@ -57,8 +65,7 @@ function PersonnelStatus(): React.ReactElement {
   const dormitory = () => {
     return (
       <div className={styles.dormitory}>
-        {/* 생활관 정보를 가져와서 출력하도록 변경예정 */}
-        <h2>1 생활관 인원현황</h2>
+        <h2>{getCookie('id')}생활관 인원현황</h2>
         {dormitorySeat()}
       </div>
     );
@@ -68,7 +75,7 @@ function PersonnelStatus(): React.ReactElement {
   const status = () => {
     return (
       <label className={styles.status}>
-        총원 {summary?.total} / 현재원 {summary?.current} / 열외 {summary?.absence}
+        총원 {state.total} / 현재원 {state.current} / 열외 {state.absence}
       </label>
     );
   };
@@ -81,15 +88,23 @@ function PersonnelStatus(): React.ReactElement {
         <table>
           <thead>
             <tr>
-              {summary?.absence_reasons.map((element, idx) => {
-                return <th key={idx}>{element[0]}</th>;
+              {state.absenceList.map((element, idx) => {
+                return <th key={idx}>{element}</th>;
               })}
             </tr>
           </thead>
           <tbody>
             <tr>
-              {summary?.absence_reasons.map((element, idx) => {
-                return <td key={idx}>{element[1]}</td>;
+              {state.absenceList.map((element, idx) => {
+                return (
+                  <td key={idx}>
+                    {
+                      members.filter(member => {
+                        return member.status === element;
+                      }).length
+                    }
+                  </td>
+                );
               })}
             </tr>
           </tbody>
