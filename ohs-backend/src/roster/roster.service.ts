@@ -86,7 +86,10 @@ export class RosterService {
 
   async findOne(date: Date): Promise<IRosterResponse> {
     // date에 맞는 근무표 조회
-    let rosters = await this.rosterRepo.find({ where: { targetDate: date } });
+    let rosters = await this.rosterRepo.find({
+      where: { targetDate: date },
+      relations: { inCharge: true },
+    });
 
     if (rosters.length == 0) {
       rosters = await this.createRoster(date);
