@@ -1,6 +1,7 @@
 import { Soldier } from 'src/soldiers/entities/soldier.entity';
 
 export interface IWorkMember {
+  rosterId: number;
   name: string;
   rankName: string;
   checked: boolean;

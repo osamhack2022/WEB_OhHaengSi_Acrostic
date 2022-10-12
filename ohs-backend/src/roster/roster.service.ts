@@ -94,8 +94,9 @@ export class RosterService {
     // DB에 저장된 방식에서 응답문 방식으로 변경하기 위해 그룹핑
     for (const roster of rosters) {
       const category = categoryMap.get(roster.categoryName);
-      const member = roster.inCharge
+      const member: IWorkMember = roster.inCharge
         ? {
+            rosterId: roster.id,
             name: roster.inCharge.name,
             rankName: rankToString(roster.inCharge.rank),
             checked: false,
