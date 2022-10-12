@@ -1,12 +1,6 @@
 import { genProvider } from 'src/database/database.helper';
 import { Soldier } from 'src/soldiers/entities/soldier.entity';
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Roster {

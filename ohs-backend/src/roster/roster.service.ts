@@ -1,7 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { from } from 'rxjs';
 import rankToString from 'src/lib/helpers/rankToString';
-import { Soldier } from 'src/soldiers/entities/soldier.entity';
 import { Repository } from 'typeorm';
 import { CreateRosterDto } from './dto/create-roster.dto';
 import {
@@ -12,11 +10,7 @@ import {
 } from './dto/read-roster.dto';
 import { UpdateRosterDto } from './dto/update-roster.dto';
 import { Roster } from './entities/roster.entity';
-import {
-  IRosterForm,
-  IRosterWorkForm,
-  RosterForm,
-} from './entities/rosterForm.entity';
+import { RosterForm } from './entities/rosterForm.entity';
 
 @Injectable()
 export class RosterService {
