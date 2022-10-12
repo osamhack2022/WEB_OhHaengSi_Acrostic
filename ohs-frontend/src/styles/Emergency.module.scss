@@ -1,0 +1,21 @@
+.box {
+  button {
+    width: 200px;
+    height: 100px;
+
+    margin: 10px;
+
+    border: 0;
+    border-radius: 5px;
+
+    font-size: 60px;
+    color: white;
+    background-color: #009879;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: red;
+    }
+  }
+}
