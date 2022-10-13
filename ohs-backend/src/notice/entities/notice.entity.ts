@@ -12,8 +12,8 @@ import {
 } from 'typeorm';
 
 export enum NoticeType {
-  NORMAL = 'normal',
   IMPORTANT = 'important',
+  NORMAL = 'normal',
 }
 
 @Entity()
@@ -23,6 +23,13 @@ export class Notice {
 
   @Column()
   title: string;
+
+  @Column({
+    type: 'enum',
+    enum: NoticeType,
+    default: NoticeType.NORMAL,
+  })
+  type: NoticeType;
 
   @Column()
   content: string;

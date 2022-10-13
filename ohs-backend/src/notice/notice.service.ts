@@ -28,7 +28,7 @@ export class NoticeService {
       query,
       items: await this.noticeRepo.find({
         where: dbQuery,
-        order: { createdAt: 'DESC' },
+        order: { type: 'DESC', createdAt: 'DESC' },
       }),
     };
   }
