@@ -44,16 +44,24 @@ export class CleaningService {
     // 생활관 목록
     let rooms = await this.roomRepo.find();
 
+    // 전체 스케줄
     let schedule = [];
 
     for (const cleaningArea of cleaningAreas) {
+      // 담당구역 주간 스케줄 처리
       let weekSchedule = [];
+
+      // 맨 첫 항목은 해당 청소구역 명칭, 이후 주차별 담당 생활관
       weekSchedule.push(cleaningArea.name);
 
-      // 기존 책임이었던 생활관부터 차례대로 삽입
+      // 현재 담당 중인 생활관 인덱스 찾기
+      let curRoomIndex = rooms.findIndex(
+        (room) => room.id == cleaningArea.inChargeId,
+      );
+
+      // 현재 담당 중인 생활관부터 인덱스 순으로 입력
       // 4주차(weeks)까지 처리
-      let tmp = rooms.findIndex((room) => room.id == cleaningArea.inChargeId);
-      for (let i = tmp; i < tmp + weeks; i++) {
+      for (let i = curRoomIndex; i < curRoomIndex + weeks; i++) {
         let inChargeRoom = rooms[i % rooms.length];
         weekSchedule.push(inChargeRoom.name);
       }

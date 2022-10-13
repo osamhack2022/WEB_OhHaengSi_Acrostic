@@ -49,6 +49,12 @@ export class CleaningController {
     return this.cleaningService.getBarrackCleaningSchedule();
   }
 
+  /**
+   *
+   * @param room 해당 생활관 ID
+   * @param date YYYY-MM 형식으로
+   * @returns
+   */
   @Get(':room/:date')
   findOne(
     @Param('room', ParseIntPipe) room: number,

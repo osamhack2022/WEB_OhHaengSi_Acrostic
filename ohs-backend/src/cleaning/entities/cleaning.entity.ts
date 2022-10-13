@@ -17,6 +17,9 @@ export class Cleaning {
   @Column()
   name: string;
 
+  @Column('date')
+  targetDate: string;
+
   @OneToOne(() => Room, (room) => room.cleaningArea)
   inCharge: Room;
 
