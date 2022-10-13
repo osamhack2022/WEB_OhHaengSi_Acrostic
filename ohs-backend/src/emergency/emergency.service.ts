@@ -1,11 +1,20 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm';
 import { CreateEmergencyDto } from './dto/create-emergency.dto';
 import { UpdateEmergencyDto } from './dto/update-emergency.dto';
+import { Emergency } from './entities/emergency.entity';
 
 @Injectable()
 export class EmergencyService {
-  create(createEmergencyDto: CreateEmergencyDto) {
-    return 'This action adds a new emergency';
+  constructor(
+    @Inject('EMERGENCY_REPOSITORY')
+    private readonly emergencyRepo: Repository<Emergency>,
+  ) {}
+
+  create(roomId: number) {
+    return this.emergencyRepo.save({
+      roomId,
+    });
   }
 
   findAll() {

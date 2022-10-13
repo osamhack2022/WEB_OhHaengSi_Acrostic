@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { EmergencyService } from './emergency.service';
 import { CreateEmergencyDto } from './dto/create-emergency.dto';
 import { UpdateEmergencyDto } from './dto/update-emergency.dto';
@@ -7,9 +15,12 @@ import { UpdateEmergencyDto } from './dto/update-emergency.dto';
 export class EmergencyController {
   constructor(private readonly emergencyService: EmergencyService) {}
 
-  @Post()
-  create(@Body() createEmergencyDto: CreateEmergencyDto) {
-    return this.emergencyService.create(createEmergencyDto);
+  @Post(':roomId')
+  create(
+    @Param('id') roomId: string,
+    @Body() createEmergencyDto: CreateEmergencyDto,
+  ) {
+    return this.emergencyService.create(+roomId);
   }
 
   @Get()
@@ -23,7 +34,10 @@ export class EmergencyController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEmergencyDto: UpdateEmergencyDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateEmergencyDto: UpdateEmergencyDto,
+  ) {
     return this.emergencyService.update(+id, updateEmergencyDto);
   }
 
