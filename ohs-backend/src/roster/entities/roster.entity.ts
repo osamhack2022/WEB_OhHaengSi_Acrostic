@@ -19,7 +19,7 @@ export class Roster {
   @Column()
   workName: string;
 
-  @Column()
+  @Column('date')
   targetDate: Date;
 
   @Column()
@@ -28,10 +28,10 @@ export class Roster {
   @Column()
   requiredPeople: number;
 
-  @ManyToOne(() => Soldier)
+  @ManyToOne(() => Soldier, { nullable: true })
   inCharge: Soldier;
 
-  @Column()
+  @Column({ nullable: true })
   @RelationId((roster: Roster) => roster.inCharge)
   inChargeId: number;
 }
