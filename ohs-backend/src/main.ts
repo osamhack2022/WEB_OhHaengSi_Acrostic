@@ -16,6 +16,7 @@ async function bootstrap() {
     .setDescription('The APIs description supported by OHS')
     .setVersion('1.0')
     .addTag('ohs')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

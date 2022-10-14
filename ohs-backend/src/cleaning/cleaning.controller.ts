@@ -9,18 +9,26 @@ import {
   UseGuards,
   ParseIntPipe,
 } from '@nestjs/common';
+import { ApiBasicAuth, ApiCreatedResponse } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt.guard';
 import { CleaningService } from './cleaning.service';
 import {
   CreateCleaningDto,
+  CreateCleaningResponse,
   CreateRoomCleaningSchedDto,
 } from './dto/create-cleaning.dto';
 import { UpdateCleaningDto } from './dto/update-cleaning.dto';
+import { Cleaning } from './entities/cleaning.entity';
 
 @Controller('cleaning')
 export class CleaningController {
   constructor(private readonly cleaningService: CleaningService) {}
 
+  @ApiBasicAuth()
+  @ApiCreatedResponse({
+    description: '청소구역이 성공적으로 생성되었습니다.',
+    type: CreateCleaningResponse,
+  })
   @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createCleaningDto: CreateCleaningDto) {

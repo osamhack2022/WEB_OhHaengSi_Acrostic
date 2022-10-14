@@ -5,6 +5,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { User } from 'src/users/entities/users.entity';
+import { LoginResponse } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -49,7 +50,7 @@ export class AuthService {
     return await this.usersService.create(createUesrDTO);
   }
 
-  async login(user: User) {
+  login(user: User): LoginResponse {
     const payload = { username: user.username, id: user.id };
     return {
       username: user.username,
