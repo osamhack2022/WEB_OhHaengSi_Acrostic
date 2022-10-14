@@ -27,11 +27,6 @@ export class CleaningController {
     return this.cleaningService.create(createCleaningDto);
   }
 
-  @Get()
-  findAll() {
-    return this.cleaningService.findAll();
-  }
-
   @UseGuards(JwtAuthGuard)
   @Post('room/:id')
   createRoomSched(

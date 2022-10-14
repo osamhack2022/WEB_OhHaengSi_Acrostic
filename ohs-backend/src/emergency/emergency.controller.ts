@@ -15,34 +15,11 @@ import { UpdateEmergencyDto } from './dto/update-emergency.dto';
 export class EmergencyController {
   constructor(private readonly emergencyService: EmergencyService) {}
 
-  @Post(':roomId')
+  @Post('room/:roomId')
   create(
-    @Param('id') roomId: string,
+    @Param('roomId') roomId: string,
     @Body() createEmergencyDto: CreateEmergencyDto,
   ) {
     return this.emergencyService.create(+roomId);
-  }
-
-  @Get()
-  findAll() {
-    return this.emergencyService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.emergencyService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateEmergencyDto: UpdateEmergencyDto,
-  ) {
-    return this.emergencyService.update(+id, updateEmergencyDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.emergencyService.remove(+id);
   }
 }
