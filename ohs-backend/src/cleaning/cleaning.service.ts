@@ -45,11 +45,11 @@ export class CleaningService {
     let rooms = await this.roomRepo.find();
 
     // 전체 스케줄
-    let schedule = [];
+    let schedule: string[][] = [];
 
     for (const cleaningArea of cleaningAreas) {
       // 담당구역 주간 스케줄 처리
-      let weekSchedule = [];
+      let weekSchedule: string[] = [];
 
       // 맨 첫 항목은 해당 청소구역 명칭, 이후 주차별 담당 생활관
       weekSchedule.push(cleaningArea.name);
