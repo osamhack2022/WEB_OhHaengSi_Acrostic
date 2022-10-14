@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as morgan from 'morgan';
 import { json } from 'express';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 morgan.token('body', (req) => {
   return JSON.stringify(req['body']);
@@ -10,6 +11,15 @@ morgan.token('body', (req) => {
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const config = new DocumentBuilder()
+    .setTitle('OHS API example')
+    .setDescription('The APIs description supported by OHS')
+    .setVersion('1.0')
+    .addTag('ohs')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
+
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors();
   app.use(json());
