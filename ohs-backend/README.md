@@ -43,6 +43,8 @@ $ npm run test:cov
 **로그인 필요**
 관리자용 사용자를 생성한다.
 
+### Request
+
 ```http
 POST /auth/users
 ```
@@ -63,7 +65,7 @@ POST /auth/users
 | `name`     | `string` | **Required**. 표시될 사용자 명칭               |
 | `rank`     | `string` | **Required**. 표시될 사용자 계급               |
 
-## Responses
+### Responses
 
 생성된 사용자 정보를 반환한다.
 
@@ -96,6 +98,8 @@ POST /auth/users
 등록된 사용자 인증를 처리하고 완료시 JWT 토큰을 반환한다.
 해당 토큰을 이용해 인증이 필요한 요청을 처리한다.
 
+### Request
+
 ```http
 POST /auth/login
 ```
@@ -112,7 +116,7 @@ POST /auth/login
 | `username` | `string` | **Required**. 접속을 위한 사용자 계정명        |
 | `password` | `string` | **Required**. 접속을 위한 사용자 계정 비밀번호 |
 
-## Responses
+### Responses
 
 인증된 사용자의 접속 토큰을 제공한다.
 
@@ -130,6 +134,8 @@ POST /auth/login
 
 특정 생활관의 인원 현황을 요청한다.
 
+### Request
+
 ```http
 GET /room/:id
 ```
@@ -138,9 +144,11 @@ GET /room/:id
 | :-------- | :------- | :--------------------------- |
 | `id`      | `number` | **Required**. 생활관 고유 ID |
 
-## Responses
+### Responses
 
 요청한 생활관의 인원 현황을 반환한다.
+
+### Example
 
 <details>
 <summary>
@@ -216,6 +224,8 @@ GET /room/:id
 
 특정 병사의 정보를 변경한다.
 
+### Request
+
 ```http
 PATCH /soldiers/:id
 ```
@@ -232,9 +242,11 @@ PATCH /soldiers/:id
 | :-------- | :------- | :------------------------------------------------ |
 | `status`  | `string` | 변경할 상태 입력 ('열중', '근무', '휴가', '기타') |
 
-## Responses
+### Responses
 
 변경된 병사 정보를 응답한다.
+
+### Example
 
 <details>
 <summary>
@@ -259,6 +271,8 @@ PATCH /soldiers/:id
 
 특정 날짜의 근무표를 요청한다.
 
+### Request
+
 ```http
 GET /roster/:date
 ```
@@ -267,9 +281,11 @@ GET /roster/:date
 | :-------- | :------- | :------------------------------------------------ |
 | `date`    | `string` | **Required**. 요청할 근무표의 날짜 ex) 2022-10-10 |
 
-## Responses
+### Responses
 
 요청한 날짜의 근무표를 반환한다.
+
+### Example
 
 <details>
 <summary>
@@ -390,6 +406,8 @@ GET /roster/:date
 
 ## 임무분담제 요청
 
+### Request
+
 특정 날짜의 특정 생활관의 임무분담제 내용을 요청한다.
 
 ```http
@@ -401,9 +419,11 @@ GET /roster/:room/:date
 | `room`    | `number` | **Required**. 요청할 생활관 ID                    |
 | `date`    | `string` | **Required**. 요청할 근무표의 날짜 ex) 2022-10-10 |
 
-## Responses
+### Responses
 
 요청내용에 맞는 임무분담제 정보를 반환한다.
+
+### Example
 
 <details>
 <summary>
@@ -441,6 +461,8 @@ GET /roster/:room/:date
 
 전파사항 목록을 반환한다.
 
+### Request
+
 ```http
 GET /notice?date=2022-10-21
 ```
@@ -449,9 +471,11 @@ GET /notice?date=2022-10-21
 | :-------- | :------- | :------------------------------------------------------------------------------- |
 | `date`    | `string` | **Optional**. 전파사항 작성일. 제공되지 않으면 전체 전파사항 반환 ex) 2022-10-10 |
 
-## Responses
+### Responses
 
 요청 정보와 함께 요청 정보에 맞는 전파사항을 반환한다.
+
+### Example
 
 <details>
 <summary>
@@ -494,6 +518,8 @@ GET /notice?date=2022-10-21
 
 특정 전파사항의 상세 내용을 반환한다.
 
+### Request
+
 ```http
 GET /notice/:id
 ```
@@ -502,9 +528,11 @@ GET /notice/:id
 | :-------- | :------- | :--------------------------------- |
 | `id`      | `number` | **Required**. 응답할 전파사항의 ID |
 
-## Responses
+### Responses
 
 해당 전파사항을 반환한다.
+
+### Example
 
 <details>
 <summary>
