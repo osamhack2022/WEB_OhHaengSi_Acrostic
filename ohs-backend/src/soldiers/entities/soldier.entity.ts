@@ -42,6 +42,7 @@ export class Soldier {
   @ManyToOne(() => Room, (room) => room.members)
   room: Room;
 
+  @ApiProperty()
   @RelationId((soldier: Soldier) => soldier.room)
   @Column({ nullable: false })
   roomId: number;
