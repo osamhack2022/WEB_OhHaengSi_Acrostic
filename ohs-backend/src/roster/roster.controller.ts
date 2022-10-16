@@ -11,7 +11,9 @@ import {
 import { RosterService } from './roster.service';
 import { CreateRosterDto } from './dto/create-roster.dto';
 import { UpdateRosterDto } from './dto/update-roster.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('roster')
 @Controller('roster')
 export class RosterController {
   constructor(private readonly rosterService: RosterService) {}

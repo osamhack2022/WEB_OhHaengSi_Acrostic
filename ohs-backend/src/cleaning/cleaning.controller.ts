@@ -15,6 +15,7 @@ import {
   ApiCreatedResponse,
   ApiOkResponse,
   ApiParam,
+  ApiTags,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt.guard';
 import { UpdateResult } from 'typeorm';
@@ -28,6 +29,7 @@ import {
 import { UpdateCleaningDto } from './dto/update-cleaning.dto';
 import { RoomCleaningSched } from './entities/cleaning.entity';
 
+@ApiTags('cleaning')
 @Controller('cleaning')
 export class CleaningController {
   constructor(private readonly cleaningService: CleaningService) {}

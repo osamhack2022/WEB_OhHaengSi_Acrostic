@@ -15,11 +15,14 @@ import { CreateNoticeDto } from './dto/create-notice.dto';
 import { UpdateNoticeDto } from './dto/update-notice.dto';
 import { JwtAuthGuard } from 'src/auth/jwt.guard';
 import { Request } from 'express';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('notice')
 @Controller('notice')
 export class NoticeController {
   constructor(private readonly noticeService: NoticeService) {}
 
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createNoticeDto: CreateNoticeDto, @Req() req: Request) {

@@ -10,7 +10,9 @@ import {
 import { EmergencyService } from './emergency.service';
 import { CreateEmergencyDto } from './dto/create-emergency.dto';
 import { UpdateEmergencyDto } from './dto/update-emergency.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('emergency')
 @Controller('emergency')
 export class EmergencyController {
   constructor(private readonly emergencyService: EmergencyService) {}

@@ -11,12 +11,14 @@ import {
 import { RoomService } from './room.service';
 import { CreateRoomDto } from './dto/create-room.dto';
 import { UpdateRoomDto } from './dto/update-room.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('room')
 @Controller('room')
 export class RoomController {
   private readonly logger = new Logger(RoomController.name);
 
-  constructor(private readonly roomService: RoomService) {} 
+  constructor(private readonly roomService: RoomService) {}
 
   @Post()
   create(@Body() createRoomDto: CreateRoomDto) {

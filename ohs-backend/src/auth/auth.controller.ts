@@ -5,6 +5,7 @@ import {
   ApiCreatedResponse,
   ApiOkResponse,
   ApiResponse,
+  ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
@@ -13,6 +14,7 @@ import { LoginRequest, LoginResponse } from './dto/login.dto';
 import { JwtAuthGuard } from './jwt.guard';
 import { LocalAuthGuard } from './local-auth.guard';
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
