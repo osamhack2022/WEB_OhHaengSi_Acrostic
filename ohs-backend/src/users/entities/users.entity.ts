@@ -7,12 +7,15 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Notice } from 'src/notice/entities/notice.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class User {
+  @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty()
   @Column({
     unique: true,
   })
@@ -21,9 +24,11 @@ export class User {
   @Column()
   password: string;
 
+  @ApiProperty()
   @Column()
   name: string;
 
+  @ApiProperty()
   @Column()
   rank: string;
 
