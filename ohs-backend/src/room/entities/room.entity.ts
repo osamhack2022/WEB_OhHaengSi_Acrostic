@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   Cleaning,
   RoomCleaningSched,
@@ -14,12 +15,17 @@ import {
 
 @Entity()
 export class Room {
+  @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty()
   @Column({ length: 500 })
   name: string;
 
+  @ApiProperty({
+    type: () => [Soldier],
+  })
   @OneToMany(() => Soldier, (solider) => solider.room)
   members: Soldier[];
 
