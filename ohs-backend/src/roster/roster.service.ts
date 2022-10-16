@@ -118,7 +118,7 @@ export class RosterService {
       }
     }
 
-    const organizedRoster: IOrganizedRoster = [];
+    const organizedRoster: IOrganizedRoster[] = [];
     for (const category of categoryMap.entries()) {
       const categoryName = category[0];
       const works = category[1];
@@ -149,9 +149,5 @@ export class RosterService {
   async update(id: number, updateRosterDto: UpdateRosterDto) {
     await this.rosterRepo.update(id, updateRosterDto);
     return await this.rosterRepo.findOneBy({ id });
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} roster`;
   }
 }

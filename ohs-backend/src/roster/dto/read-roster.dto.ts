@@ -1,23 +1,46 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Soldier } from 'src/soldiers/entities/soldier.entity';
 
-export interface IWorkMember {
+export class IWorkMember {
+  @ApiProperty()
   rosterId: number;
+
+  @ApiProperty()
   name: string;
+
+  @ApiProperty()
   rankName: string;
+
+  @ApiProperty()
   checked: boolean;
 }
 
-export interface IRosterWork {
+export class IRosterWork {
+  @ApiProperty()
   name: string;
+
+  @ApiProperty({
+    type: [IWorkMember],
+  })
   members: IWorkMember[];
 }
 
-export type IOrganizedRoster = {
+export class IOrganizedRoster {
+  @ApiProperty()
   name: string;
-  works: IRosterWork[];
-}[];
 
-export interface IRosterResponse {
+  @ApiProperty({
+    type: () => [IRosterWork],
+  })
+  works: IRosterWork[];
+}
+
+export class IRosterResponse {
+  @ApiProperty()
   date: string;
-  roster: IOrganizedRoster;
+
+  @ApiProperty({
+    type: () => [IOrganizedRoster],
+  })
+  roster: IOrganizedRoster[];
 }
