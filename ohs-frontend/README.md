@@ -65,3 +65,10 @@ https://ohs.run.goorm.io/
 https://ohs.run.goorm.io/api
 
 ## 발표시나리오
+
+## TODO
+
+근무표 근무자 확인 스키마 물어보기
+data null 처리 여부 물어보기
+cleaning data 형태 물어보기
+data 값 기입 부탁하기
