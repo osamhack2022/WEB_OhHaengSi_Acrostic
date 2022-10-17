@@ -49,7 +49,7 @@ function UseSchedule(Prop: prop) {
     getData();
   }, []);
 
-  return { wakeWorker: wakeWorker, vigilWorker: vigilWorker, confirm };
+  return { wakeWorker, vigilWorker, confirm };
 }
 
 export default UseSchedule;

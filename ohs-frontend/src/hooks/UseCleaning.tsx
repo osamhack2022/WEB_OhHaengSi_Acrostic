@@ -51,7 +51,9 @@ function UseCleaning(Prop: prop) {
   };
 
   // 담당구역 변경 시 사용할 함수
-  const chPerson = () => {};
+  const chPerson = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    console.log(e.target.value);
+  };
 
   // 사용자에게 보여줄 데이터를 전송하는 함수
   const getData = () => {
@@ -73,7 +75,7 @@ function UseCleaning(Prop: prop) {
     getData();
   }, []);
 
-  return { byRoom: byRoom, inRoom: inRoom, personnel, selectStyle };
+  return { byRoom, inRoom, personnel, chPerson, selectStyle };
 }
 
 export default UseCleaning;
