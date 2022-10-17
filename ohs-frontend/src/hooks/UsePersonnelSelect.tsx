@@ -7,6 +7,7 @@ type data = {
 };
 const option: data[] = [
   { value: '열중', label: '열중' },
+  { value: '근무', label: '근무' },
   { value: '외출', label: '외출' },
   { value: '외박', label: '외박' },
   { value: '휴가', label: '휴가' },

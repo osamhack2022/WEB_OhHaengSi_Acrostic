@@ -41,7 +41,7 @@ function PersonnelStatus(): React.ReactElement {
                 defaultValue={defaultValue(members[i].status)}
                 options={options}
                 onChange={select => {
-                  chStatus(members[i].id, select!.value);
+                  chStatus(members[i], select!.value);
                 }}
                 styles={selectStyle}
               />
@@ -88,23 +88,15 @@ function PersonnelStatus(): React.ReactElement {
         <table>
           <thead>
             <tr>
-              {state.absenceList.map((element, idx) => {
-                return <th key={idx}>{element}</th>;
+              {state.absence_reasons.map((element, idx) => {
+                return <th key={idx}>{element[0]}</th>;
               })}
             </tr>
           </thead>
           <tbody>
             <tr>
-              {state.absenceList.map((element, idx) => {
-                return (
-                  <td key={idx}>
-                    {
-                      members.filter(member => {
-                        return member.status === element;
-                      }).length
-                    }
-                  </td>
-                );
+              {state.absence_reasons.map((element, idx) => {
+                return <th key={idx}>{element[1]}</th>;
               })}
             </tr>
           </tbody>

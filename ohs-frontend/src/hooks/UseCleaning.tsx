@@ -5,19 +5,21 @@ import { NonceProvider } from 'react-select';
 type data = {
   room: number;
   date: string;
-  byRoom: (string | number)[][];
+  byRoom: string[][];
   inRoom: string[][];
 };
+
+type prop = { room: string; date: string };
 
 const example_data: data = {
   room: 2,
   date: '2022-07-08',
   byRoom: [
-    ['청소구역1', 1, 2, 3, 4],
-    ['청소구역2', 1, 2, 3, 4],
-    ['청소구역3', 1, 2, 3, 4],
-    ['청소구역4', 1, 2, 3, 4],
-    ['청소구역5', 1, 2, 3, 4],
+    ['청소구역1', '1', '2', '3', '4'],
+    ['청소구역2', '1', '2', '3', '4'],
+    ['청소구역3', '1', '2', '3', '4'],
+    ['청소구역4', '1', '2', '3', '4'],
+    ['청소구역5', '1', '2', '3', '4'],
   ],
   inRoom: [
     ['청소구역1', '김일병', '박이병', '이상병', '진병장'],
@@ -26,10 +28,9 @@ const example_data: data = {
     ['청소구역4', '김일병', '박이병', '이상병', '진병장'],
     ['청소구역5', '김일병', '박이병', '이상병', '진병장'],
     ['청소구역6', '김일병', '박이병', '이상병', '진병장'],
+    ['청소구역7', '김일병', '박이병', '이상병', '진병장'],
   ],
 };
-
-type prop = { room: string; date: string };
 
 function UseCleaning(Prop: prop) {
   // 생활관 별 담당구역 데이터
@@ -57,18 +58,21 @@ function UseCleaning(Prop: prop) {
 
   // 사용자에게 보여줄 데이터를 전송하는 함수
   const getData = () => {
+    // inRoom data 물어보기
     axios
-      .get('https://ohs.run.goorm.io/roster/' + Prop.room + '/' + Prop.date)
+      .get('https://ohs.run.goorm.io/cleaning/' + Prop.room + '/' + Prop.date)
       .then((response: any) => {
         console.log(response);
+
+        setByRoom(response.data.byRoom);
+        // setInRoom(response.data.inRoom);
+        // setPersonnel(response.data.inRoom[0].slice(1));
+
+        setInRoom(example_data.inRoom);
       })
       .catch(e => {
         console.log(e);
       });
-
-    setByRoom(example_data.byRoom);
-    setInRoom(example_data.inRoom);
-    setPersonnel(example_data.inRoom[0].slice(1));
   };
 
   useEffect(() => {

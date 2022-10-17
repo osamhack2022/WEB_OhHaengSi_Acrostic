@@ -4,7 +4,7 @@ import UseBoard from '../../hooks/UseBoard';
 import { dateYMDFormat } from '../../utils/Date';
 
 function Board(): React.ReactElement {
-  const { items, content, getContent } = UseBoard({ date: dateYMDFormat });
+  const { items } = UseBoard({ date: dateYMDFormat });
   const [select, setSelect] = useState(-1);
   return (
     <div className={styles.board}>
@@ -25,16 +25,17 @@ function Board(): React.ReactElement {
                 <tr
                   key={idx}
                   onClick={() => {
-                    idx === select ? setSelect(-1) : (setSelect(idx), getContent(idx));
+                    idx === select ? setSelect(-1) : setSelect(idx);
                   }}>
                   <td>{item.type}</td>
                   <td>{item.title}</td>
-                  <td>{item.writer.name}</td>
+                  <td>{item.writerId}</td>
+                  {/* <td>{item.writer.name}</td> */}
                   <td>{item.createdAt.slice(0, 10)}</td>
                 </tr>
                 {idx === select ? (
                   <tr>
-                    <td colSpan={4}>{content}</td>
+                    <td colSpan={4}>{item.content}</td>
                   </tr>
                 ) : (
                   <></>
