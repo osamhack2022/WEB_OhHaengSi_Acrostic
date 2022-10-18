@@ -48,8 +48,8 @@ function Schedule(): React.ReactElement {
                       </>
                     ) : (
                       <>
-                        <td></td>
-                        <td></td>
+                        <td>추가</td>
+                        <td>예정</td>
                       </>
                     )}
                   </tr>
@@ -63,11 +63,11 @@ function Schedule(): React.ReactElement {
   };
 
   return (
-    <div>
+    <>
       {roster.map((area, idx) => {
         return addWorker(area.name, idx);
       })}
-    </div>
+    </>
   );
 }
 
