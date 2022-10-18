@@ -14,18 +14,18 @@ function UsePersonnel(Prop: prop) {
   const [state, setState] = useState<state>({ total: 0, current: 0, absence: 0, absence_reasons: [] });
 
   // 서버에 변경된 데이터를 전송하는 함수
-  const chStatus = async (soldier: data, select: string) => {
-    console.log(soldier.id, select);
+  const chStatus = async (soldier: data, state: string) => {
     const chSoldier = {
       name: soldier.name,
       rank: soldier.rank,
       roomId: soldier.roomId,
-      status: select,
+      status: state,
     };
     axios
       .patch('https://ohs.run.goorm.io/soldiers/' + soldier.id, chSoldier)
       .then((response: any) => {
         console.log(response);
+        getData();
       })
       .catch(e => {
         console.log(e);
