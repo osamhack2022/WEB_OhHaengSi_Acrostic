@@ -12,10 +12,10 @@ function Board(): React.ReactElement {
       <table>
         <thead>
           <tr>
-            <th>구분</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
+            <th style={{ width: '109px' }}>구분</th>
+            <th style={{ width: '349px' }}>제목</th>
+            <th style={{ width: '110px' }}>작성자</th>
+            <th style={{ width: '110px' }}>작성일</th>
           </tr>
         </thead>
         <tbody>
@@ -23,7 +23,6 @@ function Board(): React.ReactElement {
             return (
               <React.Fragment key={idx}>
                 <tr
-                  key={idx}
                   onClick={() => {
                     idx === select ? setSelect(-1) : setSelect(idx);
                   }}>
@@ -34,7 +33,7 @@ function Board(): React.ReactElement {
                   <td>{item.createdAt.slice(0, 10)}</td>
                 </tr>
                 {idx === select ? (
-                  <tr>
+                  <tr className={styles.post}>
                     <td colSpan={4}>{item.content}</td>
                   </tr>
                 ) : (
