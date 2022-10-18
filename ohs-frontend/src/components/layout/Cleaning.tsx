@@ -88,11 +88,7 @@ function CleaningEach(): React.ReactElement {
                 <tr key={idx}>
                   <th>{area[0]}</th>
                   {area.slice(1).map((person, idx) => {
-                    // return <td key={idx}>{selectPerson(person)}</td>;
-                    return <td key={idx}>{person}</td>;
-                  })}
-                  {area.slice(1).map((person, idx) => {
-                    // return <td key={idx}>{selectPerson(person)}</td>;
+                    return <td key={idx}>{selectPerson(person)}</td>;
                     return <td key={idx}>{person}</td>;
                   })}
                 </tr>

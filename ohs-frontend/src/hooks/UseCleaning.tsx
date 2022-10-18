@@ -11,27 +11,6 @@ type data = {
 
 type prop = { room: string; date: string };
 
-const example_data: data = {
-  room: 2,
-  date: '2022-07-08',
-  byRoom: [
-    ['청소구역1', '1', '2', '3', '4'],
-    ['청소구역2', '1', '2', '3', '4'],
-    ['청소구역3', '1', '2', '3', '4'],
-    ['청소구역4', '1', '2', '3', '4'],
-    ['청소구역5', '1', '2', '3', '4'],
-  ],
-  inRoom: [
-    ['청소구역1', '김일병', '박이병', '이상병', '진병장'],
-    ['청소구역2', '김일병', '박이병', '이상병', '진병장'],
-    ['청소구역3', '김일병', '박이병', '이상병', '진병장'],
-    ['청소구역4', '김일병', '박이병', '이상병', '진병장'],
-    ['청소구역5', '김일병', '박이병', '이상병', '진병장'],
-    ['청소구역6', '김일병', '박이병', '이상병', '진병장'],
-    ['청소구역7', '김일병', '박이병', '이상병', '진병장'],
-  ],
-};
-
 function UseCleaning(Prop: prop) {
   // 생활관 별 담당구역 데이터
   const [byRoom, setByRoom] = useState<(string | number)[][]>([]);
@@ -58,17 +37,15 @@ function UseCleaning(Prop: prop) {
 
   // 사용자에게 보여줄 데이터를 전송하는 함수
   const getData = () => {
-    // inRoom data 물어보기
     axios
-      .get('https://ohs.run.goorm.io/cleaning/' + Prop.room + '/' + Prop.date)
+      .get('https://ohs.run.goorm.io/cleaning/' + Prop.room + '/2022-10-17')
+      // .get('https://ohs.run.goorm.io/cleaning/' + Prop.room + '/' + Prop.date)
       .then((response: any) => {
         console.log(response);
 
         setByRoom(response.data.byRoom);
-        // setInRoom(response.data.inRoom);
-        // setPersonnel(response.data.inRoom[0].slice(1));
-
-        setInRoom(example_data.inRoom);
+        setInRoom(response.data.inRoom);
+        setPersonnel(response.data.inRoom[0].slice(5));
       })
       .catch(e => {
         console.log(e);
