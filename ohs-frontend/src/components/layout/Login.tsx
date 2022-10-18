@@ -7,28 +7,36 @@ import { setCookie } from '../../utils/Cookie';
 type data = { value: string; label: string };
 
 function Login(): React.ReactElement {
-  const [options, setOptions] = useState<data[]>([]);
+  const [options, setOptions] = useState<data[]>(() => {
+    const option = [];
+    for (let i = 1; i <= 5; i++) {
+      option.push({ value: String(i), label: i + '생활관' });
+    }
+    return option;
+  });
+
+  const selectOptions = (n: number) => {
+    const option = [];
+    for (let i = 1; i <= n; i++) {
+      option.push({ value: String(i), label: i + '생활관' });
+    }
+    return option;
+  };
 
   const getOption = () => {
     let n: number = 5;
 
-    // axios
-    //     .post('https://ohs.run.goorm.io/auth/login')
-    //     .then((response: any) => {
-    //       console.log(response);
-    //       n = response.data.room;
-    //     })
-    //     .catch(e => {
-    //       console.log(e);
-    //     });
+    axios
+      .post('https://ohs.run.goorm.io/auth/login')
+      .then((response: any) => {
+        console.log(response);
+        n = response.data.room;
+      })
+      .catch(e => {
+        console.log(e);
+      });
 
-    setOptions(() => {
-      const option = [];
-      for (let i = 1; i <= n; i++) {
-        option.push({ value: String(i), label: i + '생활관' });
-      }
-      return option;
-    });
+    setOptions(selectOptions(n));
   };
 
   const setCompany = () => {
@@ -64,7 +72,7 @@ function Login(): React.ReactElement {
   return (
     <div className={styles.login}>
       <h2>소속 입력</h2>
-      {setCompany()}
+      {/* {setCompany()} */}
       {setSelect()}
     </div>
   );
