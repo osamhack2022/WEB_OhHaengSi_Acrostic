@@ -14,18 +14,8 @@ function UseSchedule(Prop: prop) {
 
   // 근무자 확인완료 시 실행 함수
   const confirm = (worker: member, idx: number, i: number, j: number) => {
-    // 스키마 관련해서 물어보기
-    const updateRoster = {
-      categoryName: roster[idx].name,
-      workName: roster[idx].works[i].name,
-      targetDate: Prop.date,
-      checked: false,
-      requiredPeople: 1,
-      inChargeId: worker.rosterId,
-    };
-
     axios
-      .patch('https://ohs.run.goorm.io/roster/' + worker.rosterId, updateRoster)
+      .patch('https://ohs.run.goorm.io/roster/' + worker.rosterId, { checked: true })
       .then((response: any) => {
         console.log(response);
 
@@ -41,7 +31,8 @@ function UseSchedule(Prop: prop) {
   // 사용자에게 보여줄 데이터를 전송하는 함수
   const getData = async () => {
     axios
-      .get('https://ohs.run.goorm.io/roster/' + Prop.date)
+      .get('https://ohs.run.goorm.io/roster/2022-10-17')
+      // .get('https://ohs.run.goorm.io/roster/' + Prop.date)
       .then((response: any) => {
         console.log(response);
         setRoster(response.data.roster);
