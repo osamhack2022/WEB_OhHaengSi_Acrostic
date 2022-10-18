@@ -71,16 +71,35 @@ export class CleaningService {
     return schedule;
   }
 
-  async getRoomCleaningSchedule() {}
+  async getRoomCleaningSchedule(room: number): Promise<string[][]> {
+    const schedules = await this.roomCleaningSchedRepo.find({
+      where: { roomId: room },
+    });
+    const combined = [];
+
+    for (const sched of schedules) {
+      combined.push([
+        sched.name,
+        sched.primaryFirst,
+        sched.primarySecond,
+        sched.primaryThird,
+        sched.primaryFourth,
+        sched.subFirst,
+        sched.subSecond,
+        sched.subThird,
+        sched.subFourth,
+      ]);
+    }
+
+    return combined;
+  }
 
   async findOne(room: number, date: string) {
     return {
       room,
       date,
       byRoom: await this.getBarrackCleaningSchedule(),
-      inRoom: await this.roomCleaningSchedRepo.find({
-        where: { roomId: room },
-      }),
+      inRoom: await this.getRoomCleaningSchedule(room),
     };
   }
 

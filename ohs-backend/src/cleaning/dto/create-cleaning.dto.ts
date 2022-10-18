@@ -47,5 +47,5 @@ export class RoomSchedResponse {
   byRoom: string[][];
 
   @ApiProperty()
-  inRoom: RoomCleaningSched[];
+  inRoom: string[][];
 }
