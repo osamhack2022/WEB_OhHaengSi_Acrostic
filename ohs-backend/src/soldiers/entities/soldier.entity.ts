@@ -13,6 +13,9 @@ export enum SoldierStatus {
   PRESENCE = '열중',
   ON_DUTY = '근무',
   VACATION = '휴가',
+  GO_OUT = '외출',
+  STAY_OUT = '외박',
+  ON_CLINIC = '외진',
   ETC = '기타',
 }
 
