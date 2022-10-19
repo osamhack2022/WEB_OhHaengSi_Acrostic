@@ -1,32 +1,60 @@
 import React, { useEffect, useState } from 'react';
-import UseWorker, { workerDataType } from '../../hooks/UseWorker';
+import styles from '../../styles/Schedule.module.scss';
+import UseSchedule from '../../hooks/UseSchedule';
+import { dateYMDFormat } from '../../utils/Date';
 
 function Schedule(): React.ReactElement {
-  const { wakeWorkerData, vigilWorkerData, confirm } = UseWorker();
+  const { roster, confirm } = UseSchedule({ date: dateYMDFormat });
 
-  const addWorker = (workers: workerDataType[]) => {
+  const addWorker = (name: string, idx: number) => {
     return (
-      <div>
-        {workers == wakeWorkerData ? <h2>상황병</h2> : <h2>불침번</h2>}
+      <div className={styles.schedule} key={idx}>
+        <h2>{name}</h2>
         <table>
           <thead>
             <tr>
-              <th>구분</th>
-              <th>근무자</th>
-              <th>확인</th>
+              <th style={{ width: '140px' }}>근무시간</th>
+              <th style={{ width: '140px' }}>근무자</th>
+              <th style={{ width: '120px' }}>확인</th>
             </tr>
           </thead>
           <tbody>
-            {workers.map((element, idx) => {
-              return (
-                <tr key={idx} onClick={e => confirm(e, element)}>
-                  <td>{element.subCategory}</td>
-                  <td>
-                    {element.class} {element.name}
-                  </td>
-                  {element.check ? <td>확인 완료</td> : <td>확인 미완료</td>}
-                </tr>
-              );
+            {roster[idx].works.map((work, i) => {
+              return work.members.map((worker, j) => {
+                return (
+                  <tr key={j}>
+                    {work.members.length > 1 ? (
+                      j === 0 ? (
+                        <td rowSpan={work.members.length}>{work.name}</td>
+                      ) : (
+                        <></>
+                      )
+                    ) : (
+                      <td>{work.name}</td>
+                    )}
+
+                    {worker ? (
+                      <>
+                        <td>
+                          {worker!.rankName} {worker!.name}
+                        </td>
+                        {worker!.checked ? (
+                          <td>확인 완료</td>
+                        ) : (
+                          <td className={styles.unCheck} onClick={() => confirm(worker!, idx, i, j)}>
+                            <span>확인 미완료</span>
+                          </td>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        <td>추가</td>
+                        <td>예정</td>
+                      </>
+                    )}
+                  </tr>
+                );
+              });
             })}
           </tbody>
         </table>
@@ -35,10 +63,11 @@ function Schedule(): React.ReactElement {
   };
 
   return (
-    <div>
-      {addWorker(wakeWorkerData)}
-      {addWorker(vigilWorkerData)}
-    </div>
+    <>
+      {roster.map((area, idx) => {
+        return addWorker(area.name, idx);
+      })}
+    </>
   );
 }
 

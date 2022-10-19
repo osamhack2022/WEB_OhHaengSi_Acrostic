@@ -1,0 +1,43 @@
+.schedule {
+  display: inline-block;
+  margin: 5px;
+
+  table {
+    width: 400px;
+
+    box-shadow: rgba(0, 0, 0, 0.15) 0 0 20px;
+    border-collapse: collapse;
+    border: solid #009879 1px;
+    border-radius: 5px;
+
+    thead {
+      tr {
+        background-color: #009879;
+        color: #ffffff;
+      }
+    }
+
+    tbody {
+      tr {
+        border: solid #009879 1px;
+      }
+
+      .unCheck {
+        cursor: pointer;
+
+        &:hover {
+          color: #009879;
+        }
+      }
+    }
+
+    th,
+    td {
+      padding: 12px 15px;
+    }
+  }
+
+  &:nth-child(odd) {
+    float: left;
+  }
+}

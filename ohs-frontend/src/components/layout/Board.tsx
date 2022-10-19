@@ -1,36 +1,40 @@
 import React, { useState } from 'react';
-import UsePosts from '../../hooks/UsePosts';
+import styles from '../../styles/Board.module.scss';
+import UseBoard from '../../hooks/UseBoard';
+import { dateYMDFormat } from '../../utils/Date';
 
 function Board(): React.ReactElement {
-  const { posts, openPost } = UsePosts();
+  const { items } = UseBoard({ date: dateYMDFormat });
   const [select, setSelect] = useState(-1);
-
   return (
-    <div>
+    <div className={styles.board}>
+      <h2>전파사항</h2>
       <table>
         <thead>
           <tr>
-            <th>구분</th>
-            <th>제목</th>
-            <th>작성자</th>
+            <th style={{ width: '109px' }}>구분</th>
+            <th style={{ width: '349px' }}>제목</th>
+            <th style={{ width: '110px' }}>작성자</th>
+            <th style={{ width: '110px' }}>작성일</th>
           </tr>
         </thead>
         <tbody>
-          {posts.map((element, idx) => {
+          {items.map((item, idx) => {
             return (
               <React.Fragment key={idx}>
                 <tr
-                  key={idx}
                   onClick={() => {
                     idx === select ? setSelect(-1) : setSelect(idx);
                   }}>
-                  <td>{element.part}</td>
-                  <td>{element.title}</td>
-                  <td>{element.writer}</td>
+                  <td>{item.type}</td>
+                  <td>{item.title}</td>
+                  <td>{item.writerId}</td>
+                  {/* <td>{item.writer.name}</td> */}
+                  <td>{item.createdAt.slice(0, 10)}</td>
                 </tr>
                 {idx === select ? (
-                  <tr>
-                    <td colSpan={3}>{openPost(element)}</td>
+                  <tr className={styles.post}>
+                    <td colSpan={4}>{item.content}</td>
                   </tr>
                 ) : (
                   <></>
