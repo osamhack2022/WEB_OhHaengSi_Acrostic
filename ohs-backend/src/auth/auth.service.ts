@@ -4,6 +4,8 @@ import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/create-user.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { User } from 'src/users/entities/users.entity';
+import { LoginResponse } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -11,8 +13,8 @@ export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
-    private readonly configService: ConfigService
-    ) {
+    private readonly configService: ConfigService,
+  ) {
     this.init();
   }
 
@@ -48,10 +50,13 @@ export class AuthService {
     return await this.usersService.create(createUesrDTO);
   }
 
-  async login(user: any) {
+  login(user: User): LoginResponse {
     const payload = { username: user.username, id: user.id };
     return {
-      access_token: this.jwtService.sign(payload)
-    }
+      username: user.username,
+      name: user.name,
+      rank: user.rank,
+      access_token: this.jwtService.sign(payload),
+    };
   }
 }
