@@ -1,4 +1,5 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { SoldierStatus } from 'src/soldiers/entities/soldier.entity';
 import { Repository } from 'typeorm';
 import { CreateRoomDto } from './dto/create-room.dto';
 import { UpdateRoomDto } from './dto/update-room.dto';
@@ -16,43 +17,43 @@ export class RoomService {
   }
 
   findAll(): Promise<Room[]> {
-    return this.roomRepo.find();
+    return this.roomRepo.find({
+      relations: {
+        members: true,
+      },
+    });
   }
 
-  findOne(id: number) {
-    return {
-      room: {
-        id
+  async findOne(id: number) {
+    const room = await this.roomRepo.findOne({
+      where: { id },
+      relations: {
+        members: true,
       },
-      members: [
-        {
-          name: '김병장',
-          rank: 4,
-          rank_name: '병장',
-          status: '휴가',
-        },
-        {
-          name: '박일병',
-          rank: 2,
-          rank_name: '일병',
-          status: '열중',
-        },
-        {
-          name: '정상병',
-          rank: 3,
-          rank_name: '상병',
-          status: '기타',
-        },
-      ],
+    });
+
+    if (room == null) throw new NotFoundException();
+
+    const total = room.members.length;
+    const absence_reasons: [string, number][] = [
+      ...room.members
+        .filter((soldier) => soldier.status != SoldierStatus.PRESENCE)
+        .reduce((acc, cur) => {
+          let value = acc.get(cur.status);
+          acc.set(cur.status, value ? value + 1 : 1);
+
+          return acc;
+        }, new Map<string, number>()),
+    ];
+    const absence = absence_reasons.reduce((acc, cur) => acc + cur[1], 0);
+
+    return {
+      room,
       summary: {
-        total: 8,
-        absence: 3,
-        current: 5,
-        absence_reasons: [
-          ['휴가', 1],
-          ['기타', 1],
-          ['근무', 1],
-        ],
+        total,
+        absence,
+        current: total - absence,
+        absence_reasons,
       },
     };
   }

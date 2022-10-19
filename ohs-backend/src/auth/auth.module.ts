@@ -16,10 +16,10 @@ import { ConfigModule } from '@nestjs/config';
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: {
-        expiresIn: '60s',
+        expiresIn: '60d',
       },
     }),
-    ConfigModule
+    ConfigModule,
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
   exports: [AuthService],

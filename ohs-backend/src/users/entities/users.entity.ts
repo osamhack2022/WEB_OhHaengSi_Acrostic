@@ -1,29 +1,39 @@
-import { Entity, Column, PrimaryGeneratedColumn, DataSource } from 'typeorm';
+import { genProvider } from '../../database/database.helper';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  DataSource,
+  OneToMany,
+} from 'typeorm';
+import { Notice } from 'src/notice/entities/notice.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class User {
+  @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty()
   @Column({
-    unique: true
+    unique: true,
   })
   username: string;
 
   @Column()
   password: string;
 
+  @ApiProperty()
   @Column()
   name: string;
 
+  @ApiProperty()
   @Column()
   rank: string;
+
+  @OneToMany(() => Notice, (notice) => notice.writer)
+  notices: Notice[];
 }
 
-export const userProviders = [
-  {
-    provide: 'USER_REPOSITORY',
-    useFactory: (dataSource: DataSource) => dataSource.getRepository(User),
-    inject: ['DATA_SOURCE'],
-  },
-];
+export const userProviders = genProvider('USER_REPOSITORY', User);
