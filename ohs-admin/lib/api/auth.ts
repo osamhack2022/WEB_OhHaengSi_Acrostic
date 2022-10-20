@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:4000";
+const baseUrl = "https://ohs.run.goorm.io";
 
 function joinUrl(...paths: string[]) {
   if (paths.length == 0) return "";

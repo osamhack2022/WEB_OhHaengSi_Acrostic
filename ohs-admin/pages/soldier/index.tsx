@@ -38,7 +38,7 @@ type Soldier = {
 export const getStaticProps: GetStaticProps<ISoldierPageProps> = async (
   context
 ) => {
-  const res = await fetch("http://localhost:4000/soldiers");
+  const res = await fetch("https://ohs.run.goorm.io/soldiers");
   const soldiers: Soldier[] = await res.json();
 
   return {
