@@ -1,4 +1,4 @@
-import { get, post } from "./common";
+import { get, patch, post } from "./common";
 
 export type Soldier = {
   id: number;
@@ -13,3 +13,6 @@ export const createSoldier = (data: any) => post("/soldiers", data);
 export const getSoldiers = () => get("/soldiers");
 
 export const getSoldier = (id: number) => get(`/soldiers/${id}`);
+
+export const patchSoldier = (id: number, data: any) =>
+  patch(`/soldiers/${id}`, data);
