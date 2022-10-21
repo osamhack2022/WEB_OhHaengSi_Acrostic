@@ -1,23 +1,34 @@
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import ContentCard from "../../components/common/card/ContentCard";
 import Layout from "../../components/Layout/Layout";
+import { createSoldier } from "../../lib/api/soldiers";
 
 type FormData = {
   name: string;
-  rank: string;
+  rank: number;
   roomId: number;
   status: string;
 };
 
 const SoldierCreatePage = () => {
+  const router = useRouter();
   const {
     register,
     setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-  const onSubmit = handleSubmit((data) => console.log(data));
-  // firstName and lastName will have correct type
+  const onSubmit = handleSubmit((data) => {
+    createSoldier({
+      ...data,
+      rank: +data.rank,
+      roomId: +data.roomId,
+    }).then(() => {
+      alert("생성완료");
+      router.push("/soldier");
+    });
+  });
 
   return (
     <Layout>
@@ -30,7 +41,12 @@ const SoldierCreatePage = () => {
             </div>
             <div className="form-group ">
               <label className="form-label">계급</label>
-              <input className="form-control " {...register("rank")} required />
+              <select className="form-control " {...register("rank")} required>
+                <option value="1">이등병</option>
+                <option value="2">일병</option>
+                <option value="3">상병</option>
+                <option value="4">병장</option>
+              </select>
             </div>
             <div className="form-group">
               <label className="form-label">상태</label>
@@ -61,7 +77,11 @@ const SoldierCreatePage = () => {
             <button type="submit" className="btn btn-primary btn-block btn-lg">
               병사 추가
             </button>
-            <button type="button" className="btn btn-danger btn-block btn-lg">
+            <button
+              type="button"
+              className="btn btn-danger btn-block btn-lg"
+              onClick={() => setValue("roomId", 1)}
+            >
               취소
             </button>
           </form>
