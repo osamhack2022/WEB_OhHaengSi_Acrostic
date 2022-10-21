@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-type FormData = {
+export type SoldierFormData = {
   id?: number;
   name: string;
   rank: number;
@@ -10,8 +10,8 @@ type FormData = {
 };
 
 export interface ISoldierFormProps {
-  submitAction: SubmitHandler<FormData>;
-  defaultValues?: Partial<FormData>;
+  submitAction: SubmitHandler<SoldierFormData>;
+  defaultValues?: Partial<SoldierFormData>;
   submitButton?: JSX.Element;
   cancelButton?: JSX.Element;
 }
@@ -29,7 +29,7 @@ export default function SoldierForm({
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<FormData>({
+  } = useForm<SoldierFormData>({
     defaultValues,
   });
   const onSubmit = handleSubmit(submitAction);
