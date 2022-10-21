@@ -25,37 +25,30 @@ export const DEFAULT_OPTIONS: RequestInit = {
   referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
 };
 
-function createOptions(options?: RequestInit, accessToken?: string) {
+function createOptions(options?: RequestInit) {
   const opts = options ?? DEFAULT_OPTIONS;
+  const loginedUser = localStorage.getItem("user");
 
-  if (accessToken) {
-    opts.headers = { ...opts.headers, Bearer: accessToken };
+  if (loginedUser) {
+    const accessToken = JSON.parse(loginedUser)["access_token"];
+    opts.headers = { ...opts.headers, Authorization: "Bearer " + accessToken };
   }
 
   return opts;
 }
 
-export async function get(
-  url: string,
-  options?: RequestInit,
-  accessToken?: string
-) {
+export async function get(url: string, options?: RequestInit) {
   const response = await fetch(joinUrl(baseUrl, url), {
-    ...createOptions(options, accessToken),
+    ...createOptions(options),
     method: "GET", // *GET, POST, PUT, DELETE 등
   });
 
   return response.json(); // JSON 응답을 네이티브 JavaScript 객체로 파싱
 }
 
-export async function post<T>(
-  url: string,
-  data: any,
-  options?: RequestInit,
-  accessToken?: string
-) {
+export async function post<T>(url: string, data: any, options?: RequestInit) {
   const response = await fetch(joinUrl(baseUrl, url), {
-    ...createOptions(options, accessToken),
+    ...createOptions(options),
     method: "POST",
     body: JSON.stringify(data),
   });
@@ -63,14 +56,9 @@ export async function post<T>(
   return response.json() as T;
 }
 
-export async function patch<T>(
-  url: string,
-  data: any,
-  options?: RequestInit,
-  accessToken?: string
-) {
+export async function patch<T>(url: string, data: any, options?: RequestInit) {
   const response = await fetch(joinUrl(baseUrl, url), {
-    ...createOptions(options, accessToken),
+    ...createOptions(options),
     method: "PATCH",
     body: JSON.stringify(data),
   });
@@ -78,14 +66,9 @@ export async function patch<T>(
   return response.json() as T;
 }
 
-export async function del<T>(
-  url: string,
-  data: any,
-  options?: RequestInit,
-  accessToken?: string
-) {
+export async function del<T>(url: string, data: any, options?: RequestInit) {
   const response = await fetch(joinUrl(baseUrl, url), {
-    ...createOptions(options, accessToken),
+    ...createOptions(options),
     method: "DELETE",
     body: JSON.stringify(data),
   });
