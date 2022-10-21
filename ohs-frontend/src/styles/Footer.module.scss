@@ -1,0 +1,15 @@
+.footer {
+  position: relative;
+  transform: translateY(-100%);
+
+  width: 840px;
+  height: 24px;
+
+  margin: 0 auto;
+
+  label {
+    margin: auto 12px;
+  }
+
+  background-color: rgb(119, 119, 119);
+}

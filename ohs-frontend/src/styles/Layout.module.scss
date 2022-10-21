@@ -1,0 +1,82 @@
+@font-face {
+  font-family: 'roka';
+  src: url('./font/강한육군\ Bold.ttf');
+}
+
+.wrap {
+  position: relative;
+  box-sizing: border-box;
+  width: 840px;
+  height: 100%;
+  min-height: 900px;
+
+  margin: 0 auto;
+  margin-top: -48px;
+  padding-top: 48px;
+  padding-bottom: 24px;
+
+  text-align: center;
+  font-family: 'roka';
+  .head {
+    box-sizing: border-box;
+    height: 140px;
+    h1 {
+      height: 50px;
+    }
+
+    label {
+      height: 30px;
+    }
+
+    .menu {
+      position: relative;
+
+      height: 59px;
+
+      border-bottom: solid #009879 1px;
+
+      li {
+        border-collapse: separate;
+        display: inline-block;
+
+        margin: 10px 30px;
+        padding: 6px 12px;
+
+        background-color: white;
+
+        border-radius: 5px;
+
+        transition: color 1s ease-in-out;
+
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover {
+          color: white;
+          background-color: #009879;
+        }
+      }
+      .act {
+        color: white;
+        background-color: #009879;
+      }
+    }
+  }
+
+  .contents {
+    position: relative;
+    max-height: calc(900px - 222px);
+    overflow-y: auto;
+
+    margin: 10px;
+
+    h2 {
+      margin-bottom: 8px;
+    }
+
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
