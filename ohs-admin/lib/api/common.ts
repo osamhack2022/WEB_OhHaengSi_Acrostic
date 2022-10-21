@@ -1,3 +1,5 @@
+import { isBrowser } from "../helpers/common";
+
 const baseUrl = "http://localhost:4000";
 
 export function joinUrl(...paths: string[]) {
@@ -27,7 +29,7 @@ export const DEFAULT_OPTIONS: RequestInit = {
 
 function createOptions(options?: RequestInit) {
   const opts = options ?? DEFAULT_OPTIONS;
-  const loginedUser = localStorage.getItem("user");
+  const loginedUser = isBrowser() ? localStorage.getItem("user") : undefined;
 
   if (loginedUser) {
     const accessToken = JSON.parse(loginedUser)["access_token"];
