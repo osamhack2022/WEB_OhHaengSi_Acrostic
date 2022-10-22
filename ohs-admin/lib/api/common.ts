@@ -39,7 +39,7 @@ function createOptions(options?: RequestInit) {
   return opts;
 }
 
-export async function get<T>(url: string, options?: RequestInit) {
+export async function get<T = any>(url: string, options?: RequestInit) {
   const response = await fetch(joinUrl(baseUrl, url), {
     ...createOptions(options),
     method: "GET", // *GET, POST, PUT, DELETE 등
@@ -48,7 +48,11 @@ export async function get<T>(url: string, options?: RequestInit) {
   return response.json() as T; // JSON 응답을 네이티브 JavaScript 객체로 파싱
 }
 
-export async function post<T>(url: string, data: any, options?: RequestInit) {
+export async function post<T = any>(
+  url: string,
+  data: any,
+  options?: RequestInit
+) {
   const response = await fetch(joinUrl(baseUrl, url), {
     ...createOptions(options),
     method: "POST",
@@ -58,7 +62,11 @@ export async function post<T>(url: string, data: any, options?: RequestInit) {
   return response.json() as T;
 }
 
-export async function patch<T>(url: string, data: any, options?: RequestInit) {
+export async function patch<T = any>(
+  url: string,
+  data: any,
+  options?: RequestInit
+) {
   const response = await fetch(joinUrl(baseUrl, url), {
     ...createOptions(options),
     method: "PATCH",
@@ -68,7 +76,11 @@ export async function patch<T>(url: string, data: any, options?: RequestInit) {
   return response.json() as T;
 }
 
-export async function del<T>(url: string, data: any, options?: RequestInit) {
+export async function del<T = any>(
+  url: string,
+  data: any,
+  options?: RequestInit
+) {
   const response = await fetch(joinUrl(baseUrl, url), {
     ...createOptions(options),
     method: "DELETE",
