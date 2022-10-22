@@ -14,6 +14,7 @@ import { UpdateRosterDto } from './dto/update-roster.dto';
 import { ApiOkResponse, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { IRosterResponse } from './dto/read-roster.dto';
 import { Roster } from './entities/roster.entity';
+import { RosterForm } from './entities/rosterForm.entity';
 
 @ApiTags('roster')
 @Controller('roster')
@@ -23,6 +24,14 @@ export class RosterController {
   @Post()
   create(@Body() createRosterDto: CreateRosterDto) {
     return this.rosterService.create(createRosterDto);
+  }
+
+  @ApiOkResponse({
+    type: [RosterForm],
+  })
+  @Get('/form')
+  getRosterForms() {
+    return this.rosterService.getDummyForms();
   }
 
   @ApiParam({
