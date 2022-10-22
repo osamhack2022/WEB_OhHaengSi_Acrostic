@@ -34,6 +34,14 @@ export class RosterController {
     return this.rosterService.getDummyForms();
   }
 
+  @ApiOkResponse({
+    type: [RosterForm],
+  })
+  @Get('/form/:id')
+  getRosterForm() {
+    return this.rosterService.getDummyForm();
+  }
+
   @ApiParam({
     name: 'date',
     description: 'YYYY-MM-dd',
