@@ -18,7 +18,7 @@ const RosterFormPage: NextPage<IRosterFormPageProps> = ({ rosterForms }) => {
           items={rosterForms}
           itemMapper={(item) => [
             item.id,
-            <Link href={`${item.id}`}>{item.name}</Link>,
+            <Link href={`form/${item.id}`}>{item.name}</Link>,
             new Date(item.createdAt).toLocaleString(),
             new Date(item.updatedAt).toLocaleString(),
             item.active ? "활성" : "비활성",
