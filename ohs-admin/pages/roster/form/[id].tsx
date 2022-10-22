@@ -1,31 +1,56 @@
-import { GetStaticProps, NextPage } from "next";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 import ContentCard from "../../../components/common/card/ContentCard";
 import Table from "../../../components/common/Table";
 import Layout from "../../../components/Layout/Layout";
-import { getRosterForms, RosterForm } from "../../../lib/api/roster";
+import RosterFormForm from "../../../components/Roster/RosterFormForm";
+import {
+  getRosterForm,
+  getRosterForms,
+  RosterForm,
+} from "../../../lib/api/roster";
 
 interface IRosterFormDetailPageProps {
-  rosterForms: RosterForm[];
+  rosterForm: RosterForm;
 }
 
 const RosterFormDetailPage: NextPage<IRosterFormDetailPageProps> = ({
-  rosterForms,
+  rosterForm,
 }) => {
   return (
     <Layout>
-      <ContentCard className="col-xl-12" title="근무표 양식 목록"></ContentCard>
+      <ContentCard
+        className="col-xl-12"
+        title={`근무표 양식 - ${rosterForm.name}`}
+      >
+        <RosterFormForm submitAction={() => {}} defaultValues={rosterForm} />
+      </ContentCard>
     </Layout>
   );
+};
+
+export const getStaticPaths: GetStaticPaths = () => {
+  return {
+    paths: [{ params: { id: "0" } }, { params: { id: "1" } }],
+
+    fallback: false,
+  };
 };
 
 export const getStaticProps: GetStaticProps<
   IRosterFormDetailPageProps
 > = async (context) => {
-  const rosterForms: RosterForm[] = await getRosterForms();
+  const id = context?.params?.id;
+  if (!id) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const rosterForm: RosterForm = await getRosterForm(+id);
 
   return {
-    props: { rosterForms },
+    props: { rosterForm },
   };
 };
 
