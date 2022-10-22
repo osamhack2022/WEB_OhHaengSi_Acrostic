@@ -39,13 +39,13 @@ function createOptions(options?: RequestInit) {
   return opts;
 }
 
-export async function get(url: string, options?: RequestInit) {
+export async function get<T>(url: string, options?: RequestInit) {
   const response = await fetch(joinUrl(baseUrl, url), {
     ...createOptions(options),
     method: "GET", // *GET, POST, PUT, DELETE 등
   });
 
-  return response.json(); // JSON 응답을 네이티브 JavaScript 객체로 파싱
+  return response.json() as T; // JSON 응답을 네이티브 JavaScript 객체로 파싱
 }
 
 export async function post<T>(url: string, data: any, options?: RequestInit) {
