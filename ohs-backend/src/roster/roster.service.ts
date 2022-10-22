@@ -31,6 +31,7 @@ export class RosterService {
   getDummyForm(): RosterForm {
     return {
       id: 0,
+      name: '임시근무표',
       active: true,
       detail: [
         {
@@ -46,7 +47,37 @@ export class RosterService {
           ],
         },
       ],
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      deletedAt: null,
     };
+  }
+
+  getDummyForms(): RosterForm[] {
+    return [
+      {
+        id: 0,
+        name: '임시근무표',
+        active: true,
+        detail: [
+          {
+            name: '지휘통제실',
+            works: [{ name: '00:00~08:00', requiredMember: 2 }],
+          },
+          {
+            name: '위병소',
+            works: [
+              { name: '00:00~02:00', requiredMember: 2 },
+              { name: '02:00~04:00', requiredMember: 1 },
+              { name: '04:00~06:00', requiredMember: 3 },
+            ],
+          },
+        ],
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        deletedAt: null,
+      },
+    ];
   }
 
   async createRoster(targetDate: Date, formId?: number) {

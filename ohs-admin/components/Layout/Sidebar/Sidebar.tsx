@@ -50,10 +50,20 @@ const Sidebar: React.FC = () => {
         href="/room"
         icon={solid("person-shelter")}
       />
-      <MenuItem
+      <AccordionMenuItem
         name="근무표 관리"
-        href="/roster"
+        parentPath="/roster"
         icon={solid("clipboard-list")}
+        subPaths={[
+          {
+            name: "근무표 목록",
+            path: "/roster",
+          },
+          {
+            name: "근무표 양식",
+            path: "/roster/form",
+          },
+        ]}
       />
       <MenuItem name="임무분담제 관리" href="/cleaning" icon={solid("broom")} />
       <MenuItem name="전파사항 관리" href="/notice" icon={solid("bullhorn")} />
