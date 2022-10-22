@@ -1,7 +1,9 @@
-import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
+import Link from "next/link";
 import ContentCard from "../../components/common/card/ContentCard";
 import Table from "../../components/common/Table";
 import Layout from "../../components/Layout/Layout";
+import { Soldier } from "../../lib/api/soldiers";
 
 interface ISoldierPageProps {
   soldiers: Soldier[];
@@ -16,7 +18,7 @@ const SoldierPage: NextPage<ISoldierPageProps> = ({ soldiers }) => {
           items={soldiers}
           itemMapper={(item) => [
             item.id,
-            item.name,
+            <Link href={`/soldier/${item.id}`}>{item.name}</Link>,
             item.rank,
             item.status,
             item.roomId,
@@ -25,14 +27,6 @@ const SoldierPage: NextPage<ISoldierPageProps> = ({ soldiers }) => {
       </ContentCard>
     </Layout>
   );
-};
-
-type Soldier = {
-  id: number;
-  name: string;
-  rank: number; // 1: 이병, 2: 일병, 3: 상병, 4: 병장
-  status: string;
-  roomId: number;
 };
 
 export const getStaticProps: GetStaticProps<ISoldierPageProps> = async (

@@ -1,6 +1,6 @@
 export interface ITableProps<T> {
   headers: string[];
-  itemMapper: (item: T) => (string | number)[];
+  itemMapper: (item: T) => (string | number | JSX.Element)[];
   items: T[];
 }
 
