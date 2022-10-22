@@ -20,3 +20,6 @@ export interface RosterForm {
 }
 
 export const getRosterForms = () => get<RosterForm[]>("/roster/form");
+
+export const getRosterForm = (id: number) =>
+  get<RosterForm>(`/roster/form/${id}`);
