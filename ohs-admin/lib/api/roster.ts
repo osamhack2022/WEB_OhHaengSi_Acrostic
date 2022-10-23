@@ -20,6 +20,7 @@ export interface RosterForm {
 }
 
 export interface IWorkMember {
+  id: number;
   rosterId: number;
   name: string;
   rankName: string;
@@ -59,3 +60,5 @@ export const getRoster = (date: string) =>
   get<IRosterResponse>(`/roster/${date}`);
 
 export const getRosters = () => get<IRosterListItem[]>("/roster");
+
+export const updateRoster = (data: any) => patch("/roster", data);

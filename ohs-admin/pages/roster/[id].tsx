@@ -2,7 +2,13 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import ContentCard from "../../components/common/card/ContentCard";
 import Layout from "../../components/Layout/Layout";
-import { getRoster, getRosters, IRosterResponse } from "../../lib/api/roster";
+import RosterForm from "../../components/Roster/RosterForm";
+import {
+  getRoster,
+  getRosters,
+  IRosterResponse,
+  updateRoster,
+} from "../../lib/api/roster";
 import { dateToString } from "../../lib/helpers/common";
 
 interface IRosterDetailPageProps {
@@ -15,7 +21,14 @@ const RosterDetailPage: NextPage<IRosterDetailPageProps> = ({ roster }) => {
   return (
     <Layout>
       <ContentCard className="col-xl-12" title="근무표 상세">
-        {JSON.stringify(roster)}
+        <RosterForm
+          submitAction={(data) => {
+            data.roster;
+            console.log(data);
+            // updateRoster(data);
+          }}
+          defaultValues={roster}
+        />
       </ContentCard>
     </Layout>
   );
