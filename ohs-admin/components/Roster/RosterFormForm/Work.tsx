@@ -54,7 +54,6 @@ function WorkItem({
                     if (category.id == cId) {
                       category.works = category.works.map((item) => {
                         if (item.id == work.id) {
-                          console.log("change!!", name, requiredMember);
                           return {
                             ...item,
                             name: name,

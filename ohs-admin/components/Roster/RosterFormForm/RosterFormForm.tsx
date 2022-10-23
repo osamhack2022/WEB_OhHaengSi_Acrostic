@@ -36,7 +36,7 @@ export default function RosterFormForm({
   const [detail, setDetail] = useState<ITmpRosterForm[]>(
     defaultValues?.detail ?? []
   );
-  const onSubmit = handleSubmit(submitAction);
+  const onSubmit = handleSubmit((data) => submitAction({ ...data, detail }));
 
   // detail에 수정을 위한 id 생성
   detail.forEach((item) => {
@@ -44,11 +44,9 @@ export default function RosterFormForm({
     item.works.forEach((work) => (work.id = v4()));
   });
 
-  console.log(detail);
-
   return (
-    <form onSubmit={onSubmit}>
-      {defaultValues?.id || (
+    <form>
+      {defaultValues?.id && (
         <div className="form-group ">
           <label className="form-label">번호</label>
           <input className="form-control " {...register("id")} readOnly />
@@ -61,7 +59,11 @@ export default function RosterFormForm({
       <Category items={detail} update={setDetail} />
       <div className="row">
         {submitButton ?? (
-          <button type="submit" className="btn btn-primary btn-block btn-lg">
+          <button
+            type="button"
+            className="btn btn-primary btn-block btn-lg"
+            onClick={onSubmit}
+          >
             양식 추가
           </button>
         )}
