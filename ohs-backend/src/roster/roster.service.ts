@@ -104,12 +104,19 @@ export class RosterService {
       const category = categoryMap.get(roster.categoryName);
       const member: IWorkMember = roster.inCharge
         ? {
+            id: roster.inChargeId,
             rosterId: roster.id,
             name: roster.inCharge.name,
             rankName: rankToString(roster.inCharge.rank),
             checked: roster.checked,
           }
-        : null;
+        : {
+            id: null,
+            rosterId: roster.id,
+            name: null,
+            rankName: null,
+            checked: false,
+          };
 
       if (!category) {
         // 카테고리가 없으면 새로 생성
