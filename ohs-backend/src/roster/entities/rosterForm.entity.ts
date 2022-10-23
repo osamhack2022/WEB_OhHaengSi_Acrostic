@@ -29,7 +29,9 @@ export class RosterForm {
   @Column('simple-json')
   detail: IRosterForm[];
 
-  @Column()
+  @Column({
+    default: false,
+  })
   active: boolean;
 
   @CreateDateColumn({ name: 'created_at' })

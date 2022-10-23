@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import rankToString from 'src/lib/helpers/rankToString';
 import { Repository } from 'typeorm';
-import { CreateRosterDto } from './dto/create-roster.dto';
+import { CreateRosterDto, CreateRosterFormDto } from './dto/create-roster.dto';
 import {
   IOrganizedRoster,
   IRosterResponse,
@@ -20,12 +20,29 @@ export class RosterService {
     @Inject('ROSTER_FORM_REPOSITORY')
     private readonly rosterFormRepo: Repository<RosterForm>,
   ) {}
+
   create(createRosterDto: CreateRosterDto) {
     return 'This action adds a new roster';
   }
 
   findAll() {
     return `This action returns all roster`;
+  }
+
+  createRosterForm(createRosterFormDto: CreateRosterFormDto) {
+    return this.rosterFormRepo.save(createRosterFormDto);
+  }
+
+  updateRosterForm(id: number, body: Partial<CreateRosterFormDto>) {
+    return this.rosterFormRepo.update(id, body);
+  }
+
+  getForm(id: number) {
+    return this.rosterFormRepo.findOne({ where: { id } });
+  }
+
+  getForms() {
+    return this.rosterFormRepo.find();
   }
 
   getDummyForm(): RosterForm {

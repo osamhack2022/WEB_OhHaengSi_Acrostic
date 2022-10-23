@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IRosterForm } from '../entities/rosterForm.entity';
 
 export class CreateRosterDto {
   @ApiProperty()
@@ -13,4 +14,11 @@ export class CreateRosterDto {
   requiredPeople: number;
   @ApiProperty()
   inChargeId: number;
+}
+
+export class CreateRosterFormDto {
+  id: number;
+  name: string;
+  detail: IRosterForm[];
+  active?: boolean = false;
 }

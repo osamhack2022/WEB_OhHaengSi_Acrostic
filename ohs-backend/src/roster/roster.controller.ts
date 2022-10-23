@@ -9,7 +9,7 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { RosterService } from './roster.service';
-import { CreateRosterDto } from './dto/create-roster.dto';
+import { CreateRosterDto, CreateRosterFormDto } from './dto/create-roster.dto';
 import { UpdateRosterDto } from './dto/update-roster.dto';
 import { ApiOkResponse, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { IRosterResponse } from './dto/read-roster.dto';
@@ -31,15 +31,28 @@ export class RosterController {
   })
   @Get('/form')
   getRosterForms() {
-    return this.rosterService.getDummyForms();
+    return this.rosterService.getForms();
+  }
+
+  @Post('/form')
+  createRosterForm(@Body() createRosterFormDto: CreateRosterFormDto) {
+    return this.rosterService.createRosterForm(createRosterFormDto);
+  }
+
+  @Patch('/form/:id')
+  updateRosterForm(
+    @Param('id') id: string,
+    @Body() body: Partial<CreateRosterFormDto>,
+  ) {
+    return this.rosterService.updateRosterForm(+id, body);
   }
 
   @ApiOkResponse({
     type: [RosterForm],
   })
   @Get('/form/:id')
-  getRosterForm() {
-    return this.rosterService.getDummyForm();
+  getRosterForm(@Param('id') id: string) {
+    return this.rosterService.getForm(+id);
   }
 
   @ApiParam({
