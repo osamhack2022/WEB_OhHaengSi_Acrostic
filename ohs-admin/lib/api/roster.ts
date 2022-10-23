@@ -19,6 +19,32 @@ export interface RosterForm {
   active: boolean;
 }
 
+export interface IWorkMember {
+  rosterId: number;
+  name: string;
+  rankName: string;
+  checked: boolean;
+}
+
+export interface IRosterWork {
+  name: string;
+  members: IWorkMember[];
+}
+
+export interface IOrganizedRoster {
+  name: string;
+  works: IRosterWork[];
+}
+
+export interface IRosterResponse {
+  date: string;
+  roster: IOrganizedRoster[];
+}
+
+export interface IRosterListItem {
+  targetDate: string;
+}
+
 export const getRosterForms = () => get<RosterForm[]>("/roster/form");
 
 export const getRosterForm = (id: number) =>
@@ -28,3 +54,8 @@ export const createRosterForm = (data: any) => post("/roster/form", data);
 
 export const updateRosterForm = (id: number, data: any) =>
   patch(`/roster/form/${id}`, data);
+
+export const getRoster = (date: string) =>
+  get<IRosterResponse>(`/roster/${date}`);
+
+export const getRosters = () => get<IRosterListItem[]>("/roster");

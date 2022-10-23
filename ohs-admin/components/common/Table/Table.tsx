@@ -1,6 +1,6 @@
 export interface ITableProps<T> {
   headers: string[];
-  itemMapper: (item: T) => (string | number | JSX.Element)[];
+  itemMapper: (item: T, index: number) => (string | number | JSX.Element)[];
   items: T[];
 }
 
@@ -25,7 +25,7 @@ export default function Table<T>({
       </thead>
       <tbody>
         {items.map((item, index) => {
-          const columns = itemMapper(item);
+          const columns = itemMapper(item, index);
           return (
             <tr key={index}>
               {columns.map((column, index) => (
