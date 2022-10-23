@@ -7,7 +7,7 @@ const RosterFormCreatePage: NextPage = () => {
   return (
     <Layout>
       <div className="row justify-content-center">
-        <ContentCard title="근무표 양식 추가">
+        <ContentCard title="근무표 양식 추가" className="col-10">
           <RosterFormForm submitAction={() => {}} />
         </ContentCard>
       </div>
