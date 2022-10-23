@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import rankToString from 'src/lib/helpers/rankToString';
 import { Repository } from 'typeorm';
 import { CreateRosterDto, CreateRosterFormDto } from './dto/create-roster.dto';
@@ -45,67 +45,19 @@ export class RosterService {
     return this.rosterFormRepo.find();
   }
 
-  getDummyForm(): RosterForm {
-    return {
-      id: 0,
-      name: '임시근무표',
-      active: true,
-      detail: [
-        {
-          name: '지휘통제실',
-          works: [{ name: '00:00~08:00', requiredMember: 2 }],
-        },
-        {
-          name: '위병소',
-          works: [
-            { name: '00:00~02:00', requiredMember: 2 },
-            { name: '02:00~04:00', requiredMember: 1 },
-            { name: '04:00~06:00', requiredMember: 3 },
-          ],
-        },
-      ],
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      deletedAt: null,
-    };
-  }
-
-  getDummyForms(): RosterForm[] {
-    return [
-      {
-        id: 0,
-        name: '임시근무표',
-        active: true,
-        detail: [
-          {
-            name: '지휘통제실',
-            works: [{ name: '00:00~08:00', requiredMember: 2 }],
-          },
-          {
-            name: '위병소',
-            works: [
-              { name: '00:00~02:00', requiredMember: 2 },
-              { name: '02:00~04:00', requiredMember: 1 },
-              { name: '04:00~06:00', requiredMember: 3 },
-            ],
-          },
-        ],
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        deletedAt: null,
-      },
-    ];
-  }
-
   async createRoster(targetDate: Date, formId?: number) {
     return await this.rosterRepo.manager.transaction(async (manager) => {
-      let form: RosterForm = this.getDummyForm(); // TODO: change to real date
+      let form: RosterForm = null; // TODO: change to real date
 
-      // if (formId) {
-      //   form = await manager.findOne(RosterForm, { where: { id: formId } });
-      // } else {
-      //   form = await manager.findOne(RosterForm, { where: { active: true } });
-      // }
+      if (formId) {
+        form = await manager.findOne(RosterForm, { where: { id: formId } });
+      } else {
+        form = await manager.findOne(RosterForm, { where: { active: true } });
+      }
+
+      if (!form) {
+        throw new NotFoundException('근무표 양식을 찾지 못 했습니다.');
+      }
 
       let roster: Roster[] = [];
       for (const category of form.detail) {
@@ -134,7 +86,7 @@ export class RosterService {
     });
 
     if (rosters.length == 0) {
-      rosters = await this.createRoster(date);
+      throw new NotFoundException('근무표가 아직 작성되지 않았습니다.');
     }
 
     const categoryMap = new Map<string, Map<string, IWorkMember[]>>();
