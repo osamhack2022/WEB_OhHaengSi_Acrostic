@@ -1,6 +1,6 @@
 import { isBrowser } from "../helpers/common";
 
-const baseUrl = "http://localhost:4000";
+const baseUrl = "https://ohs.run.goorm.io";
 
 export function joinUrl(...paths: string[]) {
   if (paths.length == 0) return "";
@@ -39,16 +39,20 @@ function createOptions(options?: RequestInit) {
   return opts;
 }
 
-export async function get(url: string, options?: RequestInit) {
+export async function get<T = any>(url: string, options?: RequestInit) {
   const response = await fetch(joinUrl(baseUrl, url), {
     ...createOptions(options),
     method: "GET", // *GET, POST, PUT, DELETE 등
   });
 
-  return response.json(); // JSON 응답을 네이티브 JavaScript 객체로 파싱
+  return response.json() as T; // JSON 응답을 네이티브 JavaScript 객체로 파싱
 }
 
-export async function post<T>(url: string, data: any, options?: RequestInit) {
+export async function post<T = any>(
+  url: string,
+  data: any,
+  options?: RequestInit
+) {
   const response = await fetch(joinUrl(baseUrl, url), {
     ...createOptions(options),
     method: "POST",
@@ -58,7 +62,11 @@ export async function post<T>(url: string, data: any, options?: RequestInit) {
   return response.json() as T;
 }
 
-export async function patch<T>(url: string, data: any, options?: RequestInit) {
+export async function patch<T = any>(
+  url: string,
+  data: any,
+  options?: RequestInit
+) {
   const response = await fetch(joinUrl(baseUrl, url), {
     ...createOptions(options),
     method: "PATCH",
@@ -68,7 +76,11 @@ export async function patch<T>(url: string, data: any, options?: RequestInit) {
   return response.json() as T;
 }
 
-export async function del<T>(url: string, data: any, options?: RequestInit) {
+export async function del<T = any>(
+  url: string,
+  data: any,
+  options?: RequestInit
+) {
   const response = await fetch(joinUrl(baseUrl, url), {
     ...createOptions(options),
     method: "DELETE",
