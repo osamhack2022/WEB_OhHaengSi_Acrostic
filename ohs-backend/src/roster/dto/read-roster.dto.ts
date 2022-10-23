@@ -3,6 +3,9 @@ import { Soldier } from 'src/soldiers/entities/soldier.entity';
 
 export class IWorkMember {
   @ApiProperty()
+  id: number;
+
+  @ApiProperty()
   rosterId: number;
 
   @ApiProperty()

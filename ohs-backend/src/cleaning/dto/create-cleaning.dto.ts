@@ -8,6 +8,10 @@ export class CreateCleaningDto {
   @IsString()
   name: string;
 
+  // @ApiProperty()
+  // @IsString()
+  // targetDate: string;
+
   @ApiProperty()
   @IsNumber()
   inChargeId: number;

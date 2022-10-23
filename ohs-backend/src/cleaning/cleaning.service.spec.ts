@@ -20,7 +20,6 @@ describe('CleaningService', () => {
 
   it('should be create a new monthly schedule', async () => {
     const schedule = await service.getBarrackCleaningSchedule();
-    console.log(schedule);
     expect(schedule).toBeDefined();
   });
 });

@@ -1,7 +1,7 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import rankToString from 'src/lib/helpers/rankToString';
 import { Repository } from 'typeorm';
-import { CreateRosterDto } from './dto/create-roster.dto';
+import { CreateRosterDto, CreateRosterFormDto } from './dto/create-roster.dto';
 import {
   IOrganizedRoster,
   IRosterResponse,
@@ -20,6 +20,7 @@ export class RosterService {
     @Inject('ROSTER_FORM_REPOSITORY')
     private readonly rosterFormRepo: Repository<RosterForm>,
   ) {}
+
   create(createRosterDto: CreateRosterDto) {
     return 'This action adds a new roster';
   }
@@ -28,67 +29,43 @@ export class RosterService {
     return `This action returns all roster`;
   }
 
-  getDummyForm(): RosterForm {
-    return {
-      id: 0,
-      name: '임시근무표',
-      active: true,
-      detail: [
-        {
-          name: '지휘통제실',
-          works: [{ name: '00:00~08:00', requiredMember: 2 }],
-        },
-        {
-          name: '위병소',
-          works: [
-            { name: '00:00~02:00', requiredMember: 2 },
-            { name: '02:00~04:00', requiredMember: 1 },
-            { name: '04:00~06:00', requiredMember: 3 },
-          ],
-        },
-      ],
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      deletedAt: null,
-    };
+  createRosterForm(createRosterFormDto: CreateRosterFormDto) {
+    return this.rosterFormRepo.save(createRosterFormDto);
   }
 
-  getDummyForms(): RosterForm[] {
-    return [
-      {
-        id: 0,
-        name: '임시근무표',
-        active: true,
-        detail: [
-          {
-            name: '지휘통제실',
-            works: [{ name: '00:00~08:00', requiredMember: 2 }],
-          },
-          {
-            name: '위병소',
-            works: [
-              { name: '00:00~02:00', requiredMember: 2 },
-              { name: '02:00~04:00', requiredMember: 1 },
-              { name: '04:00~06:00', requiredMember: 3 },
-            ],
-          },
-        ],
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        deletedAt: null,
-      },
-    ];
+  updateRosterForm(id: number, body: Partial<CreateRosterFormDto>) {
+    return this.rosterFormRepo.update(id, body);
+  }
+
+  getForm(id: number) {
+    return this.rosterFormRepo.findOne({ where: { id } });
+  }
+
+  getForms() {
+    return this.rosterFormRepo.find();
+  }
+
+  getRosters() {
+    return this.rosterRepo
+      .createQueryBuilder('roster')
+      .select('roster.targetDate', 'targetDate')
+      .groupBy('roster.targetDate')
+      .getRawMany();
   }
 
   async createRoster(targetDate: Date, formId?: number) {
     return await this.rosterRepo.manager.transaction(async (manager) => {
-      let form: RosterForm = this.getDummyForm(); // TODO: change to real date
+      let form: RosterForm = null; // TODO: change to real date
 
-      // if (formId) {
-      //   form = await manager.findOne(RosterForm, { where: { id: formId } });
-      // } else {
-      //   form = await manager.findOne(RosterForm, { where: { active: true } });
-      // }
+      if (formId) {
+        form = await manager.findOne(RosterForm, { where: { id: formId } });
+      } else {
+        form = await manager.findOne(RosterForm, { where: { active: true } });
+      }
+
+      if (!form) {
+        throw new NotFoundException('근무표 양식을 찾지 못 했습니다.');
+      }
 
       let roster: Roster[] = [];
       for (const category of form.detail) {
@@ -117,7 +94,7 @@ export class RosterService {
     });
 
     if (rosters.length == 0) {
-      rosters = await this.createRoster(date);
+      throw new NotFoundException('근무표가 아직 작성되지 않았습니다.');
     }
 
     const categoryMap = new Map<string, Map<string, IWorkMember[]>>();
@@ -127,12 +104,19 @@ export class RosterService {
       const category = categoryMap.get(roster.categoryName);
       const member: IWorkMember = roster.inCharge
         ? {
+            id: roster.inChargeId,
             rosterId: roster.id,
             name: roster.inCharge.name,
             rankName: rankToString(roster.inCharge.rank),
             checked: roster.checked,
           }
-        : null;
+        : {
+            id: null,
+            rosterId: roster.id,
+            name: null,
+            rankName: null,
+            checked: false,
+          };
 
       if (!category) {
         // 카테고리가 없으면 새로 생성
