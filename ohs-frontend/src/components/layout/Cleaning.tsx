@@ -5,12 +5,15 @@ import { getCookie } from '../../utils/Cookie';
 import { dateYMDFormat } from '../../utils/Date';
 
 function CleaningEach(): React.ReactElement {
-  const { byRoom, inRoom, personnel, selectStyle } = UseCleaning({ room: getCookie('id'), date: dateYMDFormat });
+  const { byRoom, inRoom, personnel, chPerson, selectStyle } = UseCleaning({
+    room: getCookie('id'),
+    date: dateYMDFormat,
+  });
 
   // table의 주차별 th 생성
   const eachWeek = () => {
     const innerHtml = [];
-    for (let i = 1; i < 5; i++) {
+    for (let i = 1; i < 5; i += 1) {
       innerHtml.push(<th key={i}>{i}주차</th>);
     }
     return innerHtml;
@@ -21,7 +24,7 @@ function CleaningEach(): React.ReactElement {
   // onClick 드롭박스로 변경예정
   const selectPerson = (name: string) => {
     return (
-      <select id="selectPerson" defaultValue={name}>
+      <select id="selectPerson" defaultValue={name} onChange={chPerson}>
         {personnel.map((element, idx) => {
           return (
             <option key={idx} value={element}>
@@ -65,7 +68,7 @@ function CleaningEach(): React.ReactElement {
   // 생활관 내 담당구역 Table
   const inRoomTable = () => {
     return (
-      <div className={styles.outRoom}>
+      <div className={styles.inRoom}>
         <h2>{getCookie('room')}생활관 내 담당구역</h2>
         <table>
           <thead>
@@ -86,9 +89,6 @@ function CleaningEach(): React.ReactElement {
                   <th>{area[0]}</th>
                   {area.slice(1).map((person, idx) => {
                     return <td key={idx}>{selectPerson(person)}</td>;
-                    return <td key={idx}>{person}</td>;
-                  })}
-                  {area.slice(1).map((person, idx) => {
                     return <td key={idx}>{person}</td>;
                   })}
                 </tr>

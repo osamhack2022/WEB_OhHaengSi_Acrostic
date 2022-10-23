@@ -27,12 +27,6 @@
 
         &:hover {
           color: #009879;
-          // span {
-          //   display: none;
-          // }
-          // &::before {
-          //   content: '확인 완료';
-          // }
         }
       }
     }
@@ -41,5 +35,9 @@
     td {
       padding: 12px 15px;
     }
+  }
+
+  &:nth-child(odd) {
+    float: left;
   }
 }

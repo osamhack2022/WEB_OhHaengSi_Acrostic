@@ -9,7 +9,7 @@ function Layout(): React.ReactElement {
   return (
     <div className={styles.wrap}>
       <div className={styles.head}>
-        <h1 onClick={() => setContent(1)}>오행시</h1>
+        <h1 onClick={() => setContent(1)}>오늘 행정반 소식</h1>
         <label>{dateKoreanFormat}</label>
         {/* <img src="" alt="logo" onClick={() => setContent(1)} /> */}
         <div className={styles.menu}>

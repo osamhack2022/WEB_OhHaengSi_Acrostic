@@ -4,7 +4,7 @@ import UseBoard from '../../hooks/UseBoard';
 import { dateYMDFormat } from '../../utils/Date';
 
 function Board(): React.ReactElement {
-  const { items, content, getContent } = UseBoard({ date: dateYMDFormat });
+  const { items } = UseBoard({ date: dateYMDFormat });
   const [select, setSelect] = useState(-1);
   return (
     <div className={styles.board}>
@@ -12,10 +12,10 @@ function Board(): React.ReactElement {
       <table>
         <thead>
           <tr>
-            <th>구분</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
+            <th style={{ width: '109px' }}>구분</th>
+            <th style={{ width: '349px' }}>제목</th>
+            <th style={{ width: '110px' }}>작성자</th>
+            <th style={{ width: '110px' }}>작성일</th>
           </tr>
         </thead>
         <tbody>
@@ -23,18 +23,18 @@ function Board(): React.ReactElement {
             return (
               <React.Fragment key={idx}>
                 <tr
-                  key={idx}
                   onClick={() => {
-                    idx === select ? setSelect(-1) : (setSelect(idx), getContent(idx));
+                    idx === select ? setSelect(-1) : setSelect(idx);
                   }}>
                   <td>{item.type}</td>
                   <td>{item.title}</td>
-                  <td>{item.writer.name}</td>
+                  <td>{item.writerId}</td>
+                  {/* <td>{item.writer.name}</td> */}
                   <td>{item.createdAt.slice(0, 10)}</td>
                 </tr>
                 {idx === select ? (
-                  <tr>
-                    <td colSpan={4}>{content}</td>
+                  <tr className={styles.post}>
+                    <td colSpan={4}>{item.content}</td>
                   </tr>
                 ) : (
                   <></>

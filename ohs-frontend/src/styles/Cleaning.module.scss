@@ -34,7 +34,8 @@
       }
     }
   }
-  .outRoom {
+
+  .inRoom {
     table {
       width: 800px;
 
@@ -64,6 +65,22 @@
           td {
             width: 70px;
             padding: 4px 5px;
+
+            border-radius: 2px;
+
+            // &:hover {
+            //   * {
+            //     color: white;
+            //     background-color: #009879;
+
+            //     * {
+            //       color: black;
+            //       background-color: white;
+            //     }
+            //   }
+            //   color: white;
+            //   background-color: #009879;
+            // }
           }
         }
       }
@@ -71,6 +88,17 @@
       th {
         padding: 4px 5px;
       }
+    }
+
+    select {
+      padding: 2px 3px;
+
+      appearance: none;
+      -webkit-appearance: none;
+
+      border: 0;
+      outline: none;
+      cursor: pointer;
     }
   }
 }

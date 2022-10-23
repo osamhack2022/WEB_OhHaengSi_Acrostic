@@ -1,13 +1,14 @@
 import axios from 'axios';
 import React from 'react';
 import styles from '../../styles/Emergency.module.scss';
+import { getCookie } from '../../utils/Cookie';
 
 function Emergency(): React.ReactElement {
   const sendData = async () => {
     axios
-      .get('https://ohs.run.goorm.io/emergency')
+      .post('https://ohs.run.goorm.io/emergency/room/' + getCookie('id'))
       .then((response: any) => {
-        console.log(response);
+        alert(response.data.roomId + '생활관 긴급 상황 전달하였습니다.');
       })
       .catch(e => {
         console.log(e);
