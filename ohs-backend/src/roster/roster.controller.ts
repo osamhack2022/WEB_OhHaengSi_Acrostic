@@ -26,6 +26,11 @@ export class RosterController {
     return this.rosterService.create(createRosterDto);
   }
 
+  @Get()
+  get() {
+    return this.rosterService.getRosters();
+  }
+
   @ApiOkResponse({
     type: [RosterForm],
   })

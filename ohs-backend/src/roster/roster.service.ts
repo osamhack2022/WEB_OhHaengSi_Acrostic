@@ -45,6 +45,14 @@ export class RosterService {
     return this.rosterFormRepo.find();
   }
 
+  getRosters() {
+    return this.rosterRepo
+      .createQueryBuilder('roster')
+      .select('roster.targetDate', 'targetDate')
+      .groupBy('roster.targetDate')
+      .getRawMany();
+  }
+
   async createRoster(targetDate: Date, formId?: number) {
     return await this.rosterRepo.manager.transaction(async (manager) => {
       let form: RosterForm = null; // TODO: change to real date
