@@ -20,7 +20,11 @@ export class CleaningService {
   ) {}
 
   create(createCleaningDto: CreateCleaningDto) {
-    return this.cleaningRepo.save(createCleaningDto);
+    // TODO: targetDate 처리 해줘야함.
+    return this.cleaningRepo.save({
+      ...createCleaningDto,
+      targetDate: '2022-10-01',
+    });
   }
 
   createRoomSched(
