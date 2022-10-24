@@ -62,3 +62,6 @@ export const getRoster = (date: string) =>
 export const getRosters = () => get<IRosterListItem[]>("/roster");
 
 export const updateRoster = (data: any) => patch("/roster", data);
+
+export const createRoster = async (date: string) =>
+  await post(`/roster/${date}`, {});
