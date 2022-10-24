@@ -1,4 +1,9 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import rankToString from 'src/lib/helpers/rankToString';
 import { Repository } from 'typeorm';
 import { CreateRosterDto, CreateRosterFormDto } from './dto/create-roster.dto';
@@ -159,6 +164,20 @@ export class RosterService {
       date: date.toISOString().slice(0, 10),
       roster: organizedRoster,
     };
+  }
+
+  async createRosters(date: Date) {
+    // date에 맞는 근무표 조회
+    let rosters = await this.rosterRepo.find({
+      where: { targetDate: date },
+      relations: { inCharge: true },
+    });
+
+    if (rosters.length > 0) {
+      throw new ConflictException('이미 생성된 근무표입니다.');
+    }
+
+    return await this.createRoster(date);
   }
 
   async update(id: number, updateRosterDto: UpdateRosterDto) {
