@@ -78,6 +78,17 @@ export class RosterController {
     return this.rosterService.findOne(new Date(date));
   }
 
+  @Post(':date')
+  async createRosterAt(@Param('date') date: string) {
+    if (!Date.parse(date)) {
+      throw new BadRequestException(
+        `${date} is not valid date format (yyyy-mm-dd)`,
+      );
+    }
+
+    return await this.rosterService.createRosters(new Date(date));
+  }
+
   @ApiOkResponse({
     description: '변경된 결과',
     type: Roster,
