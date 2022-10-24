@@ -60,7 +60,7 @@ export default function RosterFormForm({
           <button
             type="button"
             className="btn btn-danger btn-block btn-lg"
-            onClick={() => reset()}
+            onClick={() => router.reload()}
           >
             취소
           </button>
