@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { RosterService } from './roster.service';
 import { CreateRosterDto, CreateRosterFormDto } from './dto/create-roster.dto';
-import { UpdateRosterDto } from './dto/update-roster.dto';
+import { UpdateRosterDto, UpdateRostersDto } from './dto/update-roster.dto';
 import { ApiOkResponse, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { IRosterResponse } from './dto/read-roster.dto';
 import { Roster } from './entities/roster.entity';
@@ -85,5 +85,11 @@ export class RosterController {
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateRosterDto: UpdateRosterDto) {
     return this.rosterService.update(+id, updateRosterDto);
+  }
+
+  @ApiOkResponse({})
+  @Patch()
+  updateManay(@Body() updateRostersDto: UpdateRostersDto) {
+    return this.rosterService.updateMany(updateRostersDto);
   }
 }

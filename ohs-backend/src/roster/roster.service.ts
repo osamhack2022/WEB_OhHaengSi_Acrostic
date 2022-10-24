@@ -8,7 +8,7 @@ import {
   IRosterWork,
   IWorkMember,
 } from './dto/read-roster.dto';
-import { UpdateRosterDto } from './dto/update-roster.dto';
+import { UpdateRosterDto, UpdateRostersDto } from './dto/update-roster.dto';
 import { Roster } from './entities/roster.entity';
 import { RosterForm } from './entities/rosterForm.entity';
 
@@ -164,5 +164,13 @@ export class RosterService {
   async update(id: number, updateRosterDto: UpdateRosterDto) {
     await this.rosterRepo.update(id, updateRosterDto);
     return await this.rosterRepo.findOneBy({ id });
+  }
+
+  updateMany(updateRostersDto: UpdateRostersDto) {
+    for (const change of updateRostersDto.changes) {
+      this.rosterRepo.update(change.rosterId, { inChargeId: change.id });
+    }
+
+    return true;
   }
 }
