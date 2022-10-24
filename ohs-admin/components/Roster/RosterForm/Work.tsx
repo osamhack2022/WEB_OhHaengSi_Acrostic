@@ -3,6 +3,7 @@ import { IRosterWork } from "../../../lib/api/roster";
 import { rankToString } from "../../../lib/helpers/common";
 import useSoldiers from "../../../lib/hooks/useSoldiers";
 import { useAppDispatch, useAppSelector } from "../../../lib/redux/hooks";
+import { addHistory } from "../../../lib/redux/roster/rosterEditSlice";
 import { fetchSoldiers } from "../../../lib/redux/soldiers/soldierSlice";
 import { ITmpOrganizedRoster } from "./types";
 
@@ -50,6 +51,7 @@ function WorkItem({
                 className="form-control mb-2"
                 value={member?.id ?? ""}
                 onChange={(e) => {
+                  dispatch(addHistory({ ...member, id: +e.target.value }));
                   update((prev) =>
                     prev.map((category) => {
                       if (category.id == cId) {
