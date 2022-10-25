@@ -1,6 +1,6 @@
 import { isBrowser } from "../helpers/common";
 
-const baseUrl = "https://ohs.run.goorm.io";
+const baseUrl = "http://localhost:4000";
 
 export function joinUrl(...paths: string[]) {
   if (paths.length == 0) return "";
