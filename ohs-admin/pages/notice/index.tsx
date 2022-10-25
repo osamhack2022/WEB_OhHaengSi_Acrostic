@@ -11,9 +11,9 @@ interface INoticePageProps {
 }
 
 const NoticePage: NextPage<INoticePageProps> = ({ notices }) => {
-  const { post, setPost, setDefault, updateNotice, delNotice, onChange } =
+  const { notice, setNotice, setDefault, updateNotice, delNotice, onChange } =
     useNotice();
-  
+
   return (
     <Layout>
       <ContentCard className="col-xl-12" title="전파사항 작성">
@@ -22,7 +22,7 @@ const NoticePage: NextPage<INoticePageProps> = ({ notices }) => {
             <label className="form-label">구분</label>
             <select
               className="form-control "
-              defaultValue={post.type}
+              defaultValue={notice.type}
               onChange={(e) => onChange("type", e)}
             >
               <option>important</option>
@@ -34,7 +34,7 @@ const NoticePage: NextPage<INoticePageProps> = ({ notices }) => {
             <input
               type="text"
               className="form-control "
-              value={post.title}
+              value={notice.title}
               onChange={(e) => onChange("title", e)}
             />
           </div>
@@ -42,7 +42,7 @@ const NoticePage: NextPage<INoticePageProps> = ({ notices }) => {
             <label className="form-label">내용</label>
             <textarea
               className="form-control "
-              value={post.content}
+              value={notice.content}
               onChange={(e) => onChange("content", e)}
             />
           </div>
@@ -76,7 +76,9 @@ const NoticePage: NextPage<INoticePageProps> = ({ notices }) => {
           itemMapper={(item) => [
             item.id,
             item.type,
-            <div onClick={() => setPost(item)}>{item.title}</div>,
+            <div className="text-primary" onClick={() => setNotice(item)}>
+              {item.title}
+            </div>,
           ]}
         />
       </ContentCard>

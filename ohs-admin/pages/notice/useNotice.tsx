@@ -1,6 +1,6 @@
 import { prepareServerlessUrl } from "next/dist/server/base-server";
 import React, { useCallback, useState } from "react";
-import { DEFAULT_OPTIONS, del, patch } from "../../lib/api/common";
+import { DEFAULT_OPTIONS, del, patch, post } from "../../lib/api/common";
 
 export type Notice = {
   id: number;
@@ -12,28 +12,34 @@ export type Notice = {
 const defaultValue = { id: 0, title: "", content: "", type: "important" };
 
 function useNotice() {
-  const [post, setPost] = useState<Notice>(defaultValue);
+  const [notice, setNotice] = useState<Notice>(defaultValue);
 
   const setDefault = () => {
-    setPost(defaultValue);
+    setNotice(defaultValue);
   };
 
   const updateNotice = async () => {
-    if (post.id) {
-      const r = patch(`/notice/${post.id}`, post, DEFAULT_OPTIONS);
-      alert(`${post.id}번 글 변경 완료`);
+    if (notice.id) {
+      patch(`/notice/${notice.id}`, notice, DEFAULT_OPTIONS).catch((error) =>
+        console.log(error)
+      );
+      alert(`${notice.id}번 글 생성 완료`);
     } else {
-      // 글 새로작성 추가 물어보기
-      // const r = patch(`/notice`, post, DEFAULT_OPTIONS);
-      // console.log(r);
+      post(`/notice`, notice, DEFAULT_OPTIONS).catch((error) =>
+        console.log(error)
+      );
+      alert("전파사항 생성 완료");
     }
+    location.reload();
   };
 
   const delNotice = async () => {
-    if (post.id) {
+    if (notice.id) {
       if (window.confirm("삭제하시겠습니까?")) {
-        del(`/notice/${post.id}`, DEFAULT_OPTIONS);
-        alert(`${post.id}번 글 삭제 완료`);
+        del(`/notice/${notice.id}`, DEFAULT_OPTIONS).catch((error) =>
+          console.log(error)
+        );
+        alert(`${notice.id}번 글 삭제 완료`);
       }
     } else {
       alert("전파사항을 선택하여 주십시오.");
@@ -47,15 +53,22 @@ function useNotice() {
     >
   ) => {
     if (type == "type") {
-      setPost({ ...post, type: e.currentTarget.value });
+      setNotice({ ...notice, type: e.currentTarget.value });
     } else if (type == "title") {
-      setPost({ ...post, title: e.currentTarget.value });
+      setNotice({ ...notice, title: e.currentTarget.value });
     } else if (type == "content") {
-      setPost({ ...post, content: e.currentTarget.value });
+      setNotice({ ...notice, content: e.currentTarget.value });
     }
   };
 
-  return { post, setPost, setDefault, updateNotice, delNotice, onChange };
+  return {
+    notice,
+    setNotice,
+    setDefault,
+    updateNotice,
+    delNotice,
+    onChange,
+  };
 }
 
 export default useNotice;
