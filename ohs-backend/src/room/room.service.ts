@@ -59,7 +59,7 @@ export class RoomService {
   }
 
   update(id: number, updateRoomDto: UpdateRoomDto) {
-    return `This action updates a #${id} room`;
+    return this.roomRepo.update(id, updateRoomDto);
   }
 
   remove(id: number) {

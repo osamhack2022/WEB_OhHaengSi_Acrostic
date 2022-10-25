@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
+import rosterEditSlice from "./roster/rosterEditSlice";
 import soldierReducer from "./soldiers/soldierSlice";
 
 export const store = configureStore({
   reducer: {
     soldiers: soldierReducer,
+    rosterEdit: rosterEditSlice,
   },
 });
 

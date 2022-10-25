@@ -107,8 +107,9 @@ export class CleaningService {
     };
   }
 
-  update(id: number, updateCleaningDto: UpdateCleaningDto) {
-    return `This action updates a #${id} cleaning`;
+  async update(id: number, updateCleaningDto: UpdateCleaningDto) {
+    await this.cleaningRepo.update(id, updateCleaningDto);
+    return this.cleaningRepo.findOne({ where: { id } });
   }
 
   remove(id: number) {

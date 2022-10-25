@@ -24,7 +24,7 @@ export default function Table<T>({
         </tr>
       </thead>
       <tbody>
-        {items.map((item, index) => {
+        {items?.map((item, index) => {
           const columns = itemMapper(item, index);
           return (
             <tr key={index}>

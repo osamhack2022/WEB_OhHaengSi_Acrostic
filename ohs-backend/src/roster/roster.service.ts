@@ -1,4 +1,9 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import rankToString from 'src/lib/helpers/rankToString';
 import { Repository } from 'typeorm';
 import { CreateRosterDto, CreateRosterFormDto } from './dto/create-roster.dto';
@@ -8,7 +13,7 @@ import {
   IRosterWork,
   IWorkMember,
 } from './dto/read-roster.dto';
-import { UpdateRosterDto } from './dto/update-roster.dto';
+import { UpdateRosterDto, UpdateRostersDto } from './dto/update-roster.dto';
 import { Roster } from './entities/roster.entity';
 import { RosterForm } from './entities/rosterForm.entity';
 
@@ -161,8 +166,30 @@ export class RosterService {
     };
   }
 
+  async createRosters(date: Date) {
+    // date에 맞는 근무표 조회
+    let rosters = await this.rosterRepo.find({
+      where: { targetDate: date },
+      relations: { inCharge: true },
+    });
+
+    if (rosters.length > 0) {
+      throw new ConflictException('이미 생성된 근무표입니다.');
+    }
+
+    return await this.createRoster(date);
+  }
+
   async update(id: number, updateRosterDto: UpdateRosterDto) {
     await this.rosterRepo.update(id, updateRosterDto);
     return await this.rosterRepo.findOneBy({ id });
+  }
+
+  updateMany(updateRostersDto: UpdateRostersDto) {
+    for (const change of updateRostersDto.changes) {
+      this.rosterRepo.update(change.rosterId, { inChargeId: change.id });
+    }
+
+    return true;
   }
 }

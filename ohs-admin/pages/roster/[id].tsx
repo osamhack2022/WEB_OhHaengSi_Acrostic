@@ -10,6 +10,7 @@ import {
   updateRoster,
 } from "../../lib/api/roster";
 import { dateToString } from "../../lib/helpers/common";
+import { useAppSelector } from "../../lib/redux/hooks";
 
 interface IRosterDetailPageProps {
   roster: IRosterResponse;
@@ -17,15 +18,19 @@ interface IRosterDetailPageProps {
 
 const RosterDetailPage: NextPage<IRosterDetailPageProps> = ({ roster }) => {
   const router = useRouter();
+  const editingHistories = useAppSelector(
+    (root) => root.rosterEdit.editingHistories
+  );
 
   return (
     <Layout>
       <ContentCard className="col-xl-12" title="근무표 상세">
         <RosterForm
           submitAction={(data) => {
-            data.roster;
-            console.log(data);
-            // updateRoster(data);
+            updateRoster({ changes: editingHistories }).then(() => {
+              alert("변경되었습니다.");
+              router.reload();
+            });
           }}
           defaultValues={roster}
         />

@@ -38,4 +38,11 @@ export class RoomController {
   findOne(@Param('id') id: string) {
     return this.roomService.findOne(+id);
   }
+  
+
+  @ApiOkResponse({ type: Room })
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateRoomDto: UpdateRoomDto) {
+    return this.roomService.update(+id, updateRoomDto);
+  }
 }
