@@ -1,6 +1,7 @@
-import { Controller, Post, Param } from '@nestjs/common';
+import { Controller, Post, Param, Sse, Get } from '@nestjs/common';
 import { EmergencyService } from './emergency.service';
 import { ApiCreatedResponse, ApiParam, ApiTags } from '@nestjs/swagger';
+import { Subject, Observable, filter, map } from 'rxjs';
 
 @ApiTags('emergency')
 @Controller('emergency')
@@ -17,5 +18,20 @@ export class EmergencyController {
   @Post('room/:roomId')
   create(@Param('roomId') roomId: string) {
     return this.emergencyService.create(+roomId);
+  }
+
+  
+  private project$ = new Subject<{name: string}>()
+
+  // watch model event
+  // this method should be called when project is changed
+  @Get(':name')
+  onProjectChange(@Param('name') name: string) {
+    this.project$.next({name})
+  }
+
+  @Sse('sse')
+  sse(): Observable<any> {
+    return this.project$.pipe()
   }
 }
