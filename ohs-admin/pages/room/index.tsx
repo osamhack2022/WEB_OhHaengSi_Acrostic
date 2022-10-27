@@ -22,6 +22,11 @@ const RoomPage: NextPage<IRoomPageProps> = ({ rooms }) => {
             item.members.length,
           ]}
         />
+        <Link href={"/room/create"}>
+          <button type="button" className="btn btn-primary">
+            생활관 생성
+          </button>
+        </Link>
       </ContentCard>
     </Layout>
   );

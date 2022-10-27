@@ -1,4 +1,4 @@
-import { get, patch } from "./common";
+import { get, patch, post } from "./common";
 import { Soldier } from "./soldiers";
 
 export interface Room {
@@ -25,3 +25,5 @@ export const getRoom = (id: number) => get<RoomResponse>(`/room/${id}`);
 
 export const patchRoom = (id: number, data: any) =>
   patch<Room>(`/room/${id}`, data);
+
+export const createRoom = (data: any) => post("/room", data);
