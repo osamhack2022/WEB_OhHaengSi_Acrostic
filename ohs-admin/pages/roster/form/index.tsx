@@ -1,15 +1,28 @@
 import { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import ContentCard from "../../../components/common/card/ContentCard";
 import Table from "../../../components/common/Table";
 import Layout from "../../../components/Layout/Layout";
-import { getRosterForms, RosterForm } from "../../../lib/api/roster";
+import {
+  activeRosterForm,
+  getRosterForms,
+  RosterForm,
+} from "../../../lib/api/roster";
 
 interface IRosterFormPageProps {
   rosterForms: RosterForm[];
 }
 
 const RosterFormPage: NextPage<IRosterFormPageProps> = ({ rosterForms }) => {
+  const router = useRouter();
+  const activeAction = (id: number) => {
+    activeRosterForm(id).then(() => {
+      alert("활성 완료");
+      router.reload();
+    });
+  };
+
   return (
     <Layout>
       <ContentCard className="col-xl-12" title="근무표 양식 목록">
@@ -21,7 +34,17 @@ const RosterFormPage: NextPage<IRosterFormPageProps> = ({ rosterForms }) => {
             <Link href={`form/${item.id}`}>{item.name}</Link>,
             new Date(item.createdAt).toLocaleString(),
             new Date(item.updatedAt).toLocaleString(),
-            item.active ? "활성" : "비활성",
+            item.active ? (
+              "활성"
+            ) : (
+              <button
+                type="button"
+                className="btn btn-success"
+                onClick={() => activeAction(item.id)}
+              >
+                활성하기
+              </button>
+            ),
           ]}
         />
         <Link href="/roster/form/create">

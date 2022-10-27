@@ -65,3 +65,6 @@ export const updateRoster = (data: any) => patch("/roster", data);
 
 export const createRoster = async (date: string) =>
   await post(`/roster/${date}`, {});
+
+export const activeRosterForm = (id: number) =>
+  post(`/roster/form/${id}/active`, {});
