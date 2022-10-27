@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { getRooms, Room } from "../../lib/api/room";
 
 export type SoldierFormData = {
   id?: number;
@@ -32,6 +34,12 @@ export default function SoldierForm({
   } = useForm<SoldierFormData>({
     defaultValues,
   });
+  const [rooms, setRooms] = useState<Room[]>([]);
+  useEffect(() => {
+    getRooms().then((rooms) => {
+      setRooms(rooms);
+    });
+  }, []);
   const onSubmit = handleSubmit(submitAction);
 
   return (
@@ -70,10 +78,11 @@ export default function SoldierForm({
       <div className="form-group">
         <label className="form-label">생활관</label>
         <select className="form-control " {...register("roomId")} required>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
+          {rooms?.map((room) => (
+            <option key={room.id} value={room.id}>
+              {room.name}
+            </option>
+          ))}
         </select>
       </div>
       {submitButton ?? (
