@@ -42,9 +42,15 @@ const RosterFormDetailPage: NextPage<IRosterFormDetailPageProps> = ({
   );
 };
 
-export const getStaticPaths: GetStaticPaths = () => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const forms = await getRosterForms();
+  const paths = forms.map((form) => ({
+    params: {
+      id: form.id.toString(),
+    },
+  }));
   return {
-    paths: [{ params: { id: "0" } }, { params: { id: "1" } }],
+    paths,
 
     fallback: false,
   };
