@@ -1,5 +1,4 @@
-import { regular, solid } from "@fortawesome/fontawesome-svg-core/import.macro";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import type { NextPage } from "next";
 import ContentCard from "../components/common/card/ContentCard";
 import SummaryCard from "../components/common/card/SummaryCard";
@@ -18,7 +17,6 @@ import {
   ArcElement,
 } from "chart.js";
 import { Bar, Pie } from "react-chartjs-2";
-import { randomInt } from "crypto";
 
 ChartJS.register(
   CategoryScale,
