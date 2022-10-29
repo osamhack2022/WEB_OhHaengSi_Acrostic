@@ -2,7 +2,7 @@ import { get } from "./common";
 
 export type SoliderStatusStats = {
   status: string;
-  count: number;
+  count: string;
 }[];
 
 export const getSoldierStatus = () =>
@@ -19,7 +19,7 @@ export type WorkShare = {
 
 export const getWorkShare = () => get<WorkShare>("/stats/workShare");
 
+export type WorkShareByRank = { soldier_rank: number; count: string }[];
 
-export type WorkShareByRank = {"soldier_rank": number,"count": string}[]
-
-export const getWorkShareByRank = () => get<WorkShareByRank>('/stats/workShare/rank')
+export const getWorkShareByRank = () =>
+  get<WorkShareByRank>("/stats/workShare/rank");
