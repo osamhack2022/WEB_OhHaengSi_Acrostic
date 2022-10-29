@@ -1,7 +1,5 @@
-import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import type { NextPage } from "next";
 import ContentCard from "../components/common/card/ContentCard";
-import SummaryCard from "../components/common/card/SummaryCard";
 import PageHeader from "../components/common/PageHeader";
 import Container from "../components/Layout/Container";
 import Layout from "../components/Layout/Layout";
@@ -20,6 +18,7 @@ import SoliderStatusStats from "../components/Stats/SoliderStatusStats";
 import WorkShareStats from "../components/Stats/WorkShareStats";
 import WorkShareStatsByRank from "../components/Stats/WorkShareStatsByRank";
 import PersonnelReport from "../components/Stats/PersonnelReport";
+import React from "react";
 
 ChartJS.register(
   CategoryScale,
