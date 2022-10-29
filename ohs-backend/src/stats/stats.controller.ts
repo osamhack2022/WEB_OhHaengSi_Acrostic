@@ -9,4 +9,14 @@ export class StatsController {
   getSoliderStatus() {
     return this.statsService.getSoldierStatus();
   }
+
+  @Get('workShare')
+  gerWorkShare() {
+    return this.statsService.getWorkShare();
+  }
+
+  @Get('workShare/rank')
+  gerWorkShareByRank() {
+    return this.statsService.getWorkShareByRank();
+  }
 }
