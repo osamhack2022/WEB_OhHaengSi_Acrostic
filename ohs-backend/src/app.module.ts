@@ -9,6 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { SoldiersModule } from './soldiers/soldiers.module';
+import { StatsModule } from './stats/stats.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { SoldiersModule } from './soldiers/soldiers.module';
     AuthModule,
     UsersModule,
     SoldiersModule,
+    StatsModule,
   ],
   controllers: [],
   providers: [AppService],

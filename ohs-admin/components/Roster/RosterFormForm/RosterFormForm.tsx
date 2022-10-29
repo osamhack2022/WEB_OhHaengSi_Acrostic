@@ -64,7 +64,7 @@ export default function RosterFormForm({
             className="btn btn-primary btn-block btn-lg"
             onClick={onSubmit}
           >
-            양식 추가
+            양식 {defaultValues?.id ? "추가" : "수정"}
           </button>
         )}
         {cancelButton ?? (

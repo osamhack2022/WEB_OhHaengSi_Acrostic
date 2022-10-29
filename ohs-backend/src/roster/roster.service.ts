@@ -192,4 +192,20 @@ export class RosterService {
 
     return true;
   }
+
+  async activeForm(id: number) {
+    await this.rosterFormRepo
+      .createQueryBuilder()
+      .update()
+      .set({ active: false })
+      .execute();
+    await this.rosterFormRepo
+      .createQueryBuilder()
+      .update()
+      .set({ active: true })
+      .where({ id })
+      .execute();
+
+    return true;
+  }
 }

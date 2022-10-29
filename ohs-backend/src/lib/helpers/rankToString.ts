@@ -1,6 +1,6 @@
 export type RankName =
   | ''
-  | '이등병'
+  | '이병'
   | '일병'
   | '상병'
   | '병장'
@@ -22,7 +22,7 @@ export type RankName =
 
 export const RankNames: RankName[] = [
   '',
-  '이등병',
+  '이병',
   '일병',
   '상병',
   '병장',

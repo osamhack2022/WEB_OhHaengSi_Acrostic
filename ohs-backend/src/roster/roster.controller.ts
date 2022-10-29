@@ -59,6 +59,11 @@ export class RosterController {
   getRosterForm(@Param('id') id: string) {
     return this.rosterService.getForm(+id);
   }
+  
+  @Post('/form/:id/active')
+  activeForm(@Param('id') id: string) {
+    return this.rosterService.activeForm(+id);
+  }
 
   @ApiParam({
     name: 'date',

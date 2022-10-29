@@ -4,6 +4,7 @@ import ContentCard from "../../components/common/card/ContentCard";
 import Table from "../../components/common/Table";
 import Layout from "../../components/Layout/Layout";
 import { Soldier } from "../../lib/api/soldiers";
+import { rankToString } from "../../lib/helpers/common";
 
 interface ISoldierPageProps {
   soldiers: Soldier[];
@@ -19,7 +20,7 @@ const SoldierPage: NextPage<ISoldierPageProps> = ({ soldiers }) => {
           itemMapper={(item) => [
             item.id,
             <Link href={`/soldier/${item.id}`}>{item.name}</Link>,
-            item.rank,
+            rankToString(item.rank),
             item.status,
             item.roomId,
           ]}
