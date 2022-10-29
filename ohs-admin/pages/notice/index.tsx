@@ -22,7 +22,7 @@ const NoticePage: NextPage<INoticePageProps> = ({ notices }) => {
             <label className="form-label">구분</label>
             <select
               className="form-control "
-              defaultValue={notice.type}
+              value={notice.type}
               onChange={(e) => onChange("type", e)}
             >
               <option>important</option>
