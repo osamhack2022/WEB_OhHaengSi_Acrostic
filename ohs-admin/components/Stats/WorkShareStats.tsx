@@ -17,7 +17,11 @@ export default function () {
           {
             label: "근무 투입 횟수",
             data: stats.map((value) => value.count),
-            backgroundColor: "rgba(100, 99, 132, 0.5)",
+            backgroundColor: [
+              "rgba(100, 99, 132, 0.5)",
+              "rgba(255, 99, 132, 0.5)",
+              "rgba(54, 162, 235, 0.5)",
+            ],
           },
         ],
       }}
