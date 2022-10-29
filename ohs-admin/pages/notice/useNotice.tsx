@@ -23,7 +23,7 @@ function useNotice() {
       patch(`/notice/${notice.id}`, notice, DEFAULT_OPTIONS).catch((error) =>
         console.log(error)
       );
-      alert(`${notice.id}번 글 생성 완료`);
+      alert(`${notice.id}번 글 변경 완료`);
     } else {
       post(`/notice`, notice, DEFAULT_OPTIONS).catch((error) =>
         console.log(error)
@@ -40,6 +40,7 @@ function useNotice() {
           console.log(error)
         );
         alert(`${notice.id}번 글 삭제 완료`);
+        location.reload();
       }
     } else {
       alert("전파사항을 선택하여 주십시오.");
