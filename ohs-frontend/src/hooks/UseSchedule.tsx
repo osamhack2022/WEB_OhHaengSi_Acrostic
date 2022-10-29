@@ -31,8 +31,7 @@ function UseSchedule(Prop: prop) {
   // 사용자에게 보여줄 데이터를 전송하는 함수
   const getData = async () => {
     axios
-      .get('https://ohs.run.goorm.io/roster/2022-10-17')
-      // .get('https://ohs.run.goorm.io/roster/' + Prop.date)
+      .get('https://ohs.run.goorm.io/roster/' + Prop.date)
       .then((response: any) => {
         console.log(response);
         setRoster(response.data.roster);

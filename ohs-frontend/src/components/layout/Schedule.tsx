@@ -13,9 +13,9 @@ function Schedule(): React.ReactElement {
         <table>
           <thead>
             <tr>
-              <th style={{ width: '140px' }}>근무시간</th>
-              <th style={{ width: '140px' }}>근무자</th>
-              <th style={{ width: '120px' }}>확인</th>
+              <th>근무시간</th>
+              <th>근무자</th>
+              <th>확인</th>
             </tr>
           </thead>
           <tbody>
