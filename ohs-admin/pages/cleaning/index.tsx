@@ -69,7 +69,7 @@ const CleaningPage: NextPage = () => {
           </div>
           <button
             type="button"
-            className="btn btn-primary btn-lg col-3 offset-3"
+            className="btn btn-primary btn-lg col-3 offset-4_5"
             onClick={() => addArea("byRoom")}
           >
             구역 추가
