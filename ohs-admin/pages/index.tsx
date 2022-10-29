@@ -16,8 +16,9 @@ import {
   Legend,
   ArcElement,
 } from "chart.js";
-import { Bar, Pie } from "react-chartjs-2";
 import SoliderStatusStats from "../components/Stats/SoliderStatusStats";
+import WorkShareStats from "../components/Stats/WorkShareStats";
+import WorkShareStatsByRank from "../components/Stats/WorkShareStatsByRank";
 
 ChartJS.register(
   CategoryScale,
@@ -45,21 +46,17 @@ const Home: NextPage = () => {
         <PageHeader title="Dashboard" />
         <Row>
           <SummaryCard
-            title="Earnings (Monthly)"
+            title="총원"
             icon={solid("calendar")}
             themeName="primary"
           >
             $40,000
           </SummaryCard>
-          <SummaryCard
-            title="Earnings (Annual)"
-            icon={solid("dollar")}
-            themeName="success"
-          >
+          <SummaryCard title="열외" icon={solid("dollar")} themeName="success">
             $215,000
           </SummaryCard>
           <SummaryCard
-            title="Task"
+            title="현재원"
             icon={solid("clipboard-list")}
             themeName="info"
           >
@@ -93,53 +90,10 @@ const Home: NextPage = () => {
         </Row>
         <Row>
           <ContentCard title="근무 공정표(1)" className="col-6">
-            <Bar
-              data={{
-                labels,
-                datasets: [
-                  {
-                    label: "Dataset 1",
-                    data: labels.map(() => Math.floor(Math.random() * 1000)),
-                    backgroundColor: "rgba(255, 99, 132, 0.5)",
-                  },
-                  {
-                    label: "Dataset 2",
-                    data: labels.map(() => Math.floor(Math.random() * 1000)),
-                    backgroundColor: "rgba(53, 162, 235, 0.5)",
-                  },
-                ],
-              }}
-            />
+            <WorkShareStats />
           </ContentCard>
           <ContentCard title="근무 공정표(2)" className="col-3">
-            <Pie
-              data={{
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-                datasets: [
-                  {
-                    label: "# of Votes",
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                      "rgba(255, 99, 132, 0.2)",
-                      "rgba(54, 162, 235, 0.2)",
-                      "rgba(255, 206, 86, 0.2)",
-                      "rgba(75, 192, 192, 0.2)",
-                      "rgba(153, 102, 255, 0.2)",
-                      "rgba(255, 159, 64, 0.2)",
-                    ],
-                    borderColor: [
-                      "rgba(255, 99, 132, 1)",
-                      "rgba(54, 162, 235, 1)",
-                      "rgba(255, 206, 86, 1)",
-                      "rgba(75, 192, 192, 1)",
-                      "rgba(153, 102, 255, 1)",
-                      "rgba(255, 159, 64, 1)",
-                    ],
-                    borderWidth: 1,
-                  },
-                ],
-              }}
-            />
+            <WorkShareStatsByRank />
           </ContentCard>
           <ContentCard title="출타 현황" className="col-3">
             <SoliderStatusStats />
