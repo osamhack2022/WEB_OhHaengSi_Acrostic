@@ -33,4 +33,8 @@ export class EmergencyService {
   emit(channel: string, data?: object) {
     this.emitter.emit(channel, { data });
   }
+
+  findAll() {
+    return this.emergencyRepo.find({ relations: { room: true } });
+  }
 }

@@ -25,10 +25,8 @@ export class EmergencyController {
     return this.emergencyService.subscribe('emergency');
   }
 
-  // watch model event
-  // this method should be called when project is changed
-  @Get(':name')
-  onProjectChange(@Param('name') name: string) {
-    this.emergencyService.emit('emergency', { name });
+  @Get()
+  getEmergencies() {
+    return this.emergencyService.findAll();
   }
 }
