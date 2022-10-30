@@ -1,0 +1,39 @@
+.header {
+  position: relative;
+  z-index: 1000;
+
+  width: 840px;
+  height: 48px;
+  line-height: 48px;
+
+  margin: 0px auto;
+
+  color: rgba(255, 255, 255, 0.9);
+  background-color: rgb(119, 119, 119);
+
+  font-family: 'ROKABold';
+  font-size: 24px;
+
+  label {
+    float: right;
+    margin: auto 12px;
+  }
+
+  button {
+    margin: 11px 8px;
+    padding: 2px 4px;
+
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 3px;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.9);
+
+    font-family: 'ROKAMedium';
+    font-size: 18px;
+
+    float: right;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

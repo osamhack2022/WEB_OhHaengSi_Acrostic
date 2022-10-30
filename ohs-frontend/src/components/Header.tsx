@@ -1,27 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
+import styles from '../styles/Header.module.scss';
 import { getCookie, rmCookie } from '../utils/Cookie';
 
 function Header(): React.ReactElement {
-  const id = getCookie('id');
-  const logout = () => {
+  const [room, setRoom] = useState(getCookie('id'));
+  const chRoom = () => {
     rmCookie('id');
     window.location.reload();
   };
 
-  if (id == null) {
-    return (
-      <header>
-        <p>로그인하여 주십시오.</p>
-      </header>
-    );
-  } else {
-    return (
-      <header>
-        <p>{id}님 반갑습니다.</p>
-        <button onClick={logout}>logout</button>
-      </header>
-    );
-  }
+  return (
+    <header className={styles.header}>
+      {room == null ? (
+        <label>로그인하여 주십시오.</label>
+      ) : (
+        <>
+          <button onClick={chRoom}>생활관 변경</button>
+          <label>{room}생활관 입니다.</label>
+        </>
+      )}
+    </header>
+  );
 }
 
 export default Header;
