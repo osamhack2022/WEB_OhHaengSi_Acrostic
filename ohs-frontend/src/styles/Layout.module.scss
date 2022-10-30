@@ -1,0 +1,96 @@
+@font-face {
+  font-family: 'ROKABold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.1/ROKABold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ROKAMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.1/ROKAMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.wrap {
+  position: relative;
+  box-sizing: border-box;
+  width: 840px;
+  height: 100%;
+  min-height: 900px;
+
+  margin: 0 auto;
+  margin-top: -48px;
+  padding-top: 48px;
+  padding-bottom: 24px;
+
+  text-align: center;
+  font-family: 'ROKABold';
+  .head {
+    box-sizing: border-box;
+    height: 130px;
+
+    h1 {
+      height: 60px;
+      line-height: 60px;
+      font-size: 44px;
+    }
+
+    label {
+      height: 30px;
+      font-size: 16px;
+    }
+
+    .menu {
+      position: relative;
+
+      height: 39px;
+      margin-top: 10px;
+
+      border-bottom: solid #009879 1px;
+
+      li {
+        border-collapse: separate;
+        display: inline-block;
+
+        margin: 5px 30px;
+        padding: 6px 12px;
+
+        background-color: white;
+
+        border-radius: 5px;
+
+        transition: color 1s ease-in-out;
+
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover {
+          color: white;
+          background-color: #009879;
+        }
+      }
+      .act {
+        color: white;
+        background-color: #009879;
+      }
+    }
+  }
+
+  .contents {
+    position: relative;
+    max-height: calc(900px - 202px);
+    overflow-y: auto;
+
+    margin: 20px 10px;
+
+    h2 {
+      margin-bottom: 8px;
+    }
+
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

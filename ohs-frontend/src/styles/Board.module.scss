@@ -1,0 +1,41 @@
+.board {
+
+  table {
+    width: 800px;
+
+    margin: 0 auto;
+
+    box-shadow: rgba(0, 0, 0, 0.15) 0 0 20px;
+    border-collapse: collapse;
+    border: solid #009879 1px;
+    border-radius: 5px;
+
+    thead {
+      tr {
+        background-color: #009879;
+        color: #ffffff;
+
+        &:nth-child(0) {
+          width: 80px;
+        }
+
+        &:nth-child(1) {
+          width: 400px;
+        }
+
+        &:nth-child(2) {
+          width: 80px;
+        }
+
+        &:nth-child(3) {
+          width: 120px;
+        }
+      }
+    }
+
+    th,
+    td {
+      padding: 12px 15px;
+    }
+  }
+}
